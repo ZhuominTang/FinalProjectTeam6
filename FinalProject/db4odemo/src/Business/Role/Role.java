@@ -7,9 +7,10 @@ package Business.Role;
 import Business.Business.EcoSystem;
 
 import Business.Enterprise.Enterprise;
-
+import Business.Organization.Organization;
 
 import Business.UserAccount.UserAccount;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -17,8 +18,8 @@ import javax.swing.JPanel;
  * @author raunak
  */
 public abstract class Role {
-    
-    public enum RoleType{
+
+    public enum RoleType {
         SysAdmin("Sysadmin"),
         SysServicePersonnel("SysServicePersonnel"),
         Customer("Customer"),
@@ -29,13 +30,10 @@ public abstract class Role {
         Driver("Driver"),
         DistributionCenterAdmin("DistributionCenterAdmin"),
         DeliveryMan("Delivery");
-        
-        
-       
-        
-        
+
         private String value;
-        private RoleType(String value){
+
+        private RoleType(String value) {
             this.value = value;
         }
 
@@ -48,15 +46,12 @@ public abstract class Role {
             return value;
         }
     }
-    
-    public abstract JPanel createWorkArea(JPanel userProcessContainer, 
-            UserAccount account, Enterprise enterprise, 
-            EcoSystem business);
+
+    public abstract JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system,JFrame frame);
 
     @Override
     public String toString() {
         return this.getClass().getName();
     }
-    
-    
+
 }

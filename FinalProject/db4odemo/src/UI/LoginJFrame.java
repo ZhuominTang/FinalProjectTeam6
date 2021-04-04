@@ -7,6 +7,8 @@ package UI;
 
 import Business.Business.ConfigureASystem;
 import Business.Business.EcoSystem;
+import Business.DB4OUtil.DB4OUtil;
+import java.awt.CardLayout;
 
 /**
  *
@@ -14,14 +16,19 @@ import Business.Business.EcoSystem;
  */
 public class LoginJFrame extends javax.swing.JFrame {
      private  EcoSystem system;
+     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     /**
      * Creates new form LoginJFrame
      */
     public LoginJFrame() {
         initComponents();
-        system = ConfigureASystem.configure();
+        system = dB4OUtil.retrieveSystem();
         this.setSize(300, 500);
         this.setLocationRelativeTo(null);
+        LoginJPanel ljp = new LoginJPanel(system, loginJPanel, this,dB4OUtil);
+        loginJPanel.add(ljp);
+        CardLayout layout = (CardLayout)loginJPanel.getLayout();
+        layout.next(loginJPanel);
     }
 
     /**
@@ -33,17 +40,25 @@ public class LoginJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        loginJPanel = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        loginJPanel.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(loginJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(loginJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE))
         );
 
         pack();
@@ -85,5 +100,6 @@ public class LoginJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel loginJPanel;
     // End of variables declaration//GEN-END:variables
 }
