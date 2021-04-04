@@ -13,8 +13,10 @@ import java.util.ArrayList;
  * @author tzm
  */
 public class Store extends Enterprise{
+    ItemDirectory itemDirectory;
      public Store (String name){
         super(name,Enterprise.EnterpriseType.Store);
+        itemDirectory = new ItemDirectory();
     }
     @Override
     public ArrayList<Role> getSupportedRole() {
