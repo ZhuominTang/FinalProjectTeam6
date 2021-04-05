@@ -10,6 +10,7 @@ import Business.DB4OUtil.DB4OUtil;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import java.awt.CardLayout;
 
 /**
  *
@@ -25,6 +26,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private Enterprise enterprise;
     private Organization organization;
     private DB4OUtil dB4OUtil;
+
     public MainJFrame(EcoSystem system, UserAccount account, Enterprise enterprise, Organization organization, DB4OUtil dB4OUtil) {
         initComponents();
 
@@ -32,8 +34,11 @@ public class MainJFrame extends javax.swing.JFrame {
         this.account = account;
         this.enterprise = enterprise;
         this.organization = organization;
-        this.dB4OUtil=dB4OUtil;
+        this.dB4OUtil = dB4OUtil;
         this.setSize(900, 700);
+        CardLayout layout = (CardLayout) container.getLayout();
+        container.add("workArea", account.getRole().createWorkArea( container,account,organization,enterprise,system,this));
+        layout.next(container);
     }
 
     /**
@@ -53,7 +58,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         container.setLayout(new java.awt.CardLayout());
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(900, 100));
+        jPanel1.setPreferredSize(new java.awt.Dimension(900, 60));
 
         jButtonExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exit.png"))); // NOI18N
         jButtonExit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -68,16 +73,14 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(823, Short.MAX_VALUE)
-                .addComponent(jButtonExit, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(0, 843, Short.MAX_VALUE)
+                .addComponent(jButtonExit, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
                 .addComponent(jButtonExit)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(0, 3, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -92,7 +95,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(container, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(container, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -102,7 +105,7 @@ public class MainJFrame extends javax.swing.JFrame {
         LoginJFrame ljf = new LoginJFrame();
         this.dispose();
         ljf.setLocationRelativeTo(null);
-        ljf.setVisible(true);  
+        ljf.setVisible(true);
         dB4OUtil.storeSystem(system);// TODO add your handling code here:
     }//GEN-LAST:event_jButtonExitActionPerformed
 
