@@ -16,7 +16,7 @@ import java.util.Date;
 public abstract class WorkRequest {
 
     private String comment;
-     private UserAccount sender;
+    private UserAccount sender;
     private UserAccount receiver;
     private Status status;
     private Date requestDate;
