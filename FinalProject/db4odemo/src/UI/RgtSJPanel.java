@@ -29,16 +29,16 @@ public class RgtSJPanel extends javax.swing.JPanel {
     private EcoSystem system;
     private JPanel loginJPanel;
 
-    private DB4OUtil dB4OUtil;
+ 
 
     /**
      * Creates new form LoginJPanel
      */
-    public RgtSJPanel(EcoSystem system, JPanel loginJPanel, DB4OUtil dB4OUtil) {
+    public RgtSJPanel(EcoSystem system, JPanel loginJPanel) {
         initComponents();
         this.system = system;
         this.loginJPanel = loginJPanel;
-        this.dB4OUtil = dB4OUtil;
+       
         this.setSize(300, 500);
     }
 
@@ -228,6 +228,7 @@ public class RgtSJPanel extends javax.swing.JPanel {
         storePhoneTextField.setText("");
         userNameTextField.setText("");
         passwordJPasswordField.setText("");
+        DB4OUtil.getInstance().storeSystem(system);
 
     }//GEN-LAST:event_registerJButtonActionPerformed
 

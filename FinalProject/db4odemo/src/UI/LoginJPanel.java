@@ -24,17 +24,17 @@ public class LoginJPanel extends javax.swing.JPanel {
     private EcoSystem system;
     private JPanel loginJPanel;
     private JFrame frame;
-    private DB4OUtil dB4OUtil;
+  
 
     /**
      * Creates new form LoginJPanel
      */
-    public LoginJPanel(EcoSystem system, JPanel loginJPanel, JFrame frame, DB4OUtil dB4OUtil) {
+    public LoginJPanel(EcoSystem system, JPanel loginJPanel, JFrame frame) {
         initComponents();
         this.system = system;
         this.loginJPanel = loginJPanel;
         this.frame = frame;
-        this.dB4OUtil = dB4OUtil;
+       
         this.setSize(300, 500);
     }
 
@@ -189,7 +189,7 @@ public class LoginJPanel extends javax.swing.JPanel {
         }
 
         if (account != null) {
-            MainJFrame jFrame = new MainJFrame(system, account, enterprise, organization, dB4OUtil);
+            MainJFrame jFrame = new MainJFrame(system, account, enterprise, organization);
             this.frame.dispose();
             jFrame.setLocationRelativeTo(null);
             jFrame.setVisible(true);
@@ -200,7 +200,7 @@ public class LoginJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_loginJButton1ActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        RegisterJPanel ljp = new RegisterJPanel(system, loginJPanel,dB4OUtil);
+        RegisterJPanel ljp = new RegisterJPanel(system, loginJPanel);
         loginJPanel.add(ljp);
         CardLayout layout = (CardLayout) loginJPanel.getLayout();
         layout.next(loginJPanel);

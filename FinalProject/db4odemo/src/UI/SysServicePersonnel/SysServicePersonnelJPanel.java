@@ -6,10 +6,12 @@
 package UI.SysServicePersonnel;
 
 import Business.Business.EcoSystem;
+import Business.Business.Person;
 import Business.Enterprise.Enterprise;
 import static Business.Enterprise.Enterprise.EnterpriseType.Store;
 import Business.Enterprise.Store;
 import Business.Organization.Organization;
+import Business.Role.StoreAdminRole;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.Status;
 import Business.WorkQueue.StoreRegisterRequest;
@@ -33,7 +35,7 @@ public class SysServicePersonnelJPanel extends javax.swing.JPanel {
     private EcoSystem system;
     private JFrame frame;
     private Organization organization;
-    
+
     public SysServicePersonnelJPanel(JPanel userProcessContainer, Organization organization, UserAccount account, EcoSystem system, JFrame frame) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
@@ -157,9 +159,9 @@ public class SysServicePersonnelJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStoreAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStoreAcceptActionPerformed
-        
+
         int selectedRowIndex = storeRegistrationJTable.getSelectedRow();
-        
+
         if (selectedRowIndex < 0) {
             JOptionPane.showMessageDialog(this, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
@@ -167,29 +169,35 @@ public class SysServicePersonnelJPanel extends javax.swing.JPanel {
         WorkRequest wr = (WorkRequest) storeRegistrationJTable.getValueAt(selectedRowIndex, 2);
         wr.setStatus(Status.Accepted);
         StoreRegisterRequest srr = (StoreRegisterRequest) wr;
-        Store s = (Store)system.getEnterpriseDirectory().createAndAddEnterprise(srr.getStoreName(), Enterprise.EnterpriseType.Store);
-        
+        Store s = (Store) system.getEnterpriseDirectory().createAndAddEnterprise(srr.getStoreName(), Enterprise.EnterpriseType.Store);
+        Organization org = s.getOrganizationDirectory().createOrganization(Organization.Type.StoreAdmin);
+        s.getOrganizationDirectory().createOrganization(Organization.Type.StoreDistributionPersonnel);
+        s.getOrganizationDirectory().createOrganization(Organization.Type.StoreReceptionist);
+        s.setAddress(srr.getAddress());
+        s.setPhoneNumber(srr.getPhoneNumber());
+        org.getUserAccountDirectory().createUserAccount(srr.getUserName(), srr.getPassword(), new Person(), new StoreAdminRole());
         populateStoreRegistrationJTable();
-        
+
+
     }//GEN-LAST:event_btnStoreAcceptActionPerformed
     private void populateStoreRegistrationJTable() {
         DefaultTableModel model = (DefaultTableModel) storeRegistrationJTable.getModel();
-        
+
         model.setRowCount(0);
-        
+
         for (WorkRequest wr : system.getWorkQueue().getWorkRequestList()) {
             if (wr instanceof StoreRegisterRequest) {
                 StoreRegisterRequest srr = (StoreRegisterRequest) wr;
                 Object[] row = new Object[5];
-                row[0] = srr;
+                row[0] = srr.getStoreName();
                 row[1] = srr.getUserName();
                 row[2] = wr;
                 row[3] = wr.dataFormat(wr.getRequestDate());
                 model.addRow(row);
-                
+
             }
         }
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
