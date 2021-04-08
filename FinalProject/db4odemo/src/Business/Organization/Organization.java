@@ -55,7 +55,11 @@ public abstract class Organization {
     }
 
     public Organization() {
-
+        workQueue = new WorkQueue();
+        employeeDirectory = new EmployeeDirectory();
+        userAccountDirectory = new UserAccountDirectory();
+        organizationID = counter;
+        ++counter;
     }
 
     public abstract ArrayList<Role> getSupportedRole();

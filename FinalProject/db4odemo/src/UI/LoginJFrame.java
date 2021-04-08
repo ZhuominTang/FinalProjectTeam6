@@ -15,19 +15,20 @@ import java.awt.CardLayout;
  * @author tzm
  */
 public class LoginJFrame extends javax.swing.JFrame {
-     private  EcoSystem system;
-     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+
+    private static EcoSystem system = DB4OUtil.getInstance().retrieveSystem();
+
     /**
      * Creates new form LoginJFrame
      */
     public LoginJFrame() {
         initComponents();
-        system = dB4OUtil.retrieveSystem();
+
         this.setSize(300, 500);
         this.setLocationRelativeTo(null);
-        LoginJPanel ljp = new LoginJPanel(system, loginJPanel, this,dB4OUtil);
+        LoginJPanel ljp = new LoginJPanel(system, loginJPanel, this);
         loginJPanel.add(ljp);
-        CardLayout layout = (CardLayout)loginJPanel.getLayout();
+        CardLayout layout = (CardLayout) loginJPanel.getLayout();
         layout.next(loginJPanel);
     }
 

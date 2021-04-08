@@ -22,16 +22,16 @@ public class RgtCJPanel extends javax.swing.JPanel {
     private EcoSystem system;
     private JPanel loginJPanel;
 
-    private DB4OUtil dB4OUtil;
+  
 
     /**
      * Creates new form LoginJPanel
      */
-    public RgtCJPanel(EcoSystem system, JPanel loginJPanel, DB4OUtil dB4OUtil) {
+    public RgtCJPanel(EcoSystem system, JPanel loginJPanel) {
         initComponents();
         this.system = system;
         this.loginJPanel = loginJPanel;
-        this.dB4OUtil = dB4OUtil;
+       
         this.setSize(300, 500);
     }
 
