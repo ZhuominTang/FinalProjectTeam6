@@ -45,7 +45,6 @@ public class RgtCJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         backJButton = new javax.swing.JButton();
-        storeNamejLabel = new javax.swing.JLabel();
 
         backJButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         backJButton.setText("Back");
@@ -57,28 +56,21 @@ public class RgtCJPanel extends javax.swing.JPanel {
             }
         });
 
-        storeNamejLabel.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        storeNamejLabel.setText("DeliveryAgentName:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(storeNamejLabel))
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(180, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(backJButton)
-                .addGap(81, 81, 81)
-                .addComponent(storeNamejLabel)
-                .addContainerGap(361, Short.MAX_VALUE))
+                .addContainerGap(462, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -91,6 +83,5 @@ public class RgtCJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
-    private javax.swing.JLabel storeNamejLabel;
     // End of variables declaration//GEN-END:variables
 }

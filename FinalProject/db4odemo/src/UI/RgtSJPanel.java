@@ -10,6 +10,7 @@ import Business.DB4OUtil.DB4OUtil;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.Status;
 import Business.WorkQueue.StoreRegisterRequest;
 import java.awt.CardLayout;
 import java.util.Date;
@@ -218,6 +219,7 @@ public class RgtSJPanel extends javax.swing.JPanel {
         srr.setUserName(userName);
         srr.setPassword(password);
         srr.setRequestDate(new Date());
+        srr.setStatus(Status.Waiting);
 
         system.getWorkQueue().getWorkRequestList().add(srr);
         JOptionPane.showMessageDialog(this, "Your registation has been sent, please wait for approval!", "Information", JOptionPane.DEFAULT_OPTION);

@@ -66,4 +66,10 @@ public abstract class WorkRequest {
 
     }
 
+    @Override
+    public String toString() {
+        return status.getValue();
+    }
+    
+
 }

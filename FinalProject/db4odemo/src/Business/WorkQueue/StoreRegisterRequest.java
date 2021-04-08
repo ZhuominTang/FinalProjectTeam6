@@ -61,4 +61,9 @@ public class StoreRegisterRequest extends WorkRequest {
         this.Address = Address;
     }
 
+    @Override
+    public String toString() {
+        return StoreName;
+    }
+
 }
