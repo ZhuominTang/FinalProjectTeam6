@@ -15,16 +15,6 @@ import java.util.ArrayList;
 public class Store extends Enterprise {
 
     private ItemDirectory itemDirectory;
-    String address;
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    private String phoneNumber;
 
     public Store(String name) {
         super(name, Enterprise.EnterpriseType.Store);
@@ -45,11 +35,4 @@ public class Store extends Enterprise {
         this.itemDirectory = itemDirectory;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 }

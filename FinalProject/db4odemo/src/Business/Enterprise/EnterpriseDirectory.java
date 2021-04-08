@@ -30,20 +30,23 @@ public class EnterpriseDirectory {
 
     //Create enterprise
     public Enterprise createAndAddEnterprise(String name, Enterprise.EnterpriseType type) {
-        Enterprise enterprise = null;
+
         if (type == Enterprise.EnterpriseType.CustomerCenter) {
-            enterprise = new CustomerCenter(name);
+            CustomerCenter enterprise = new CustomerCenter(name);
             enterpriseList.add(enterprise);
+            return enterprise;
         }
         if (type == Enterprise.EnterpriseType.DeliveryAgent) {
-            enterprise = new DeliveryAgent(name);
+            DeliveryAgent enterprise = new DeliveryAgent(name);
             enterpriseList.add(enterprise);
+            return enterprise;
         }
         if (type == Enterprise.EnterpriseType.Store) {
-            enterprise = new Store(name);
+            Store enterprise = new Store(name);
             enterpriseList.add(enterprise);
+            return enterprise;
         }
 
-        return enterprise;
+        return null;
     }
 }
