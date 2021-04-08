@@ -11,6 +11,7 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.DeliveryAgentRegisterRequest;
+import Business.WorkQueue.Status;
 import java.awt.CardLayout;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -28,8 +29,6 @@ public class RgtDJPanel extends javax.swing.JPanel {
     private EcoSystem system;
     private JPanel loginJPanel;
 
- 
-
     /**
      * Creates new form LoginJPanel
      */
@@ -37,7 +36,7 @@ public class RgtDJPanel extends javax.swing.JPanel {
         initComponents();
         this.system = system;
         this.loginJPanel = loginJPanel;
-      
+
         this.setSize(300, 500);
     }
 
@@ -223,7 +222,7 @@ public class RgtDJPanel extends javax.swing.JPanel {
         drr.setUserName(userName);
         drr.setPassword(password);
         drr.setRequestDate(new Date());
-
+        drr.setStatus(Status.Waiting);
         system.getWorkQueue().getWorkRequestList().add(drr);
         JOptionPane.showMessageDialog(this, "Your registation has been sent, please wait for approval!", "Information", JOptionPane.DEFAULT_OPTION);
         deliveryAgentNameTextField.setText("");
