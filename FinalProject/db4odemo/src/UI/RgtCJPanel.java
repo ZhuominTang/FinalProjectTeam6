@@ -7,6 +7,7 @@ package UI;
 
 import Business.Business.EcoSystem;
 import Business.DB4OUtil.DB4OUtil;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -43,19 +44,44 @@ public class RgtCJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        backJButton = new javax.swing.JButton();
+
+        backJButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        backJButton.setText("Back");
+        backJButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        backJButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        backJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(180, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(backJButton)
+                .addContainerGap(462, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
+        loginJPanel.remove(this);
+        CardLayout layout = (CardLayout) loginJPanel.getLayout();
+        layout.previous(loginJPanel);        // TODO add your handling code here:
+    }//GEN-LAST:event_backJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backJButton;
     // End of variables declaration//GEN-END:variables
 }

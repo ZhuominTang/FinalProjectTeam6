@@ -10,7 +10,7 @@ import Business.DB4OUtil.DB4OUtil;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.StoreRegisterRequest;
+import Business.WorkQueue.DeliveryAgentRegisterRequest;
 import java.awt.CardLayout;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -20,10 +20,10 @@ import javax.swing.JPanel;
  *
  * @author tzm
  */
-public class RgtSJPanel extends javax.swing.JPanel {
+public class RgtDJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form RgtSJPanel
+     * Creates new form RgtDJPanel
      */
     private EcoSystem system;
     private JPanel loginJPanel;
@@ -33,7 +33,7 @@ public class RgtSJPanel extends javax.swing.JPanel {
     /**
      * Creates new form LoginJPanel
      */
-    public RgtSJPanel(EcoSystem system, JPanel loginJPanel, DB4OUtil dB4OUtil) {
+    public RgtDJPanel(EcoSystem system, JPanel loginJPanel, DB4OUtil dB4OUtil) {
         initComponents();
         this.system = system;
         this.loginJPanel = loginJPanel;
@@ -50,38 +50,34 @@ public class RgtSJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        registerJButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        storePhoneTextField = new javax.swing.JTextField();
+        backJButton = new javax.swing.JButton();
         storeNamejLabel = new javax.swing.JLabel();
-        storeNameTextField = new javax.swing.JTextField();
+        deliveryAgentNameTextField = new javax.swing.JTextField();
         addressjLabel = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         addressTextArea = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
         userNameTextField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        backJButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         passwordJPasswordField = new javax.swing.JPasswordField();
+        registerJButton = new javax.swing.JButton();
+        deliveryAgentPhoneTextField = new javax.swing.JTextField();
 
-        registerJButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        registerJButton.setText("Register");
-        registerJButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        registerJButton.addActionListener(new java.awt.event.ActionListener() {
+        backJButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        backJButton.setText("Back");
+        backJButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        backJButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registerJButtonActionPerformed(evt);
+                backJButtonActionPerformed(evt);
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jLabel2.setText("StroePhoneNumber:");
-
-        storePhoneTextField.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-
         storeNamejLabel.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        storeNamejLabel.setText("StoreName:");
+        storeNamejLabel.setText("DeliveryAgentName:");
 
-        storeNameTextField.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        deliveryAgentNameTextField.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 
         addressjLabel.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         addressjLabel.setText("Address: ");
@@ -97,52 +93,55 @@ public class RgtSJPanel extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel9.setText("Password:");
 
-        backJButton1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        backJButton1.setText("Back");
-        backJButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        backJButton1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        backJButton1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel2.setText("DeliveryAgentPhoneNumber:");
+
+        passwordJPasswordField.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
+
+        registerJButton.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        registerJButton.setText("Register");
+        registerJButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        registerJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backJButton1ActionPerformed(evt);
+                registerJButtonActionPerformed(evt);
             }
         });
 
-        passwordJPasswordField.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
+        deliveryAgentPhoneTextField.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(deliveryAgentPhoneTextField)
+                        .addComponent(addressjLabel)
+                        .addComponent(jLabel2)
+                        .addComponent(storeNamejLabel)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel9)
+                        .addComponent(deliveryAgentNameTextField)
+                        .addComponent(jScrollPane4)
+                        .addComponent(userNameTextField)
+                        .addComponent(passwordJPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(backJButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(storePhoneTextField)
-                            .addComponent(addressjLabel)
-                            .addComponent(jLabel2)
-                            .addComponent(storeNamejLabel)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(storeNameTextField)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-                            .addComponent(userNameTextField)
-                            .addComponent(passwordJPasswordField)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
+                        .addGap(69, 69, 69)
                         .addComponent(registerJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(backJButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(backJButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(storeNamejLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(storeNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(deliveryAgentNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addressjLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -150,7 +149,7 @@ public class RgtSJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(storePhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(deliveryAgentPhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -161,14 +160,20 @@ public class RgtSJPanel extends javax.swing.JPanel {
                 .addComponent(passwordJPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(registerJButton)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
+        loginJPanel.remove(this);
+        CardLayout layout = (CardLayout) loginJPanel.getLayout();
+        layout.previous(loginJPanel);        // TODO add your handling code here:
+    }//GEN-LAST:event_backJButtonActionPerformed
+
     private void registerJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerJButtonActionPerformed
-        String storeName = storeNameTextField.getText();
+        String storeName = deliveryAgentNameTextField.getText();
         String address = addressTextArea.getText();
-        String phone = storePhoneTextField.getText();
+        String phone = deliveryAgentPhoneTextField.getText();
         String userName = userNameTextField.getText();
         String password = String.valueOf(passwordJPasswordField.getPassword());
 
@@ -211,44 +216,37 @@ public class RgtSJPanel extends javax.swing.JPanel {
             return;
 
         }
-        StoreRegisterRequest srr = new StoreRegisterRequest();
-        srr.setStoreName(storeName);
-        srr.setAddress(address);
-        srr.setPhoneNumber(phone);
-        srr.setUserName(userName);
-        srr.setPassword(password);
-        srr.setRequestDate(new Date());
+        DeliveryAgentRegisterRequest drr = new DeliveryAgentRegisterRequest();
+        drr.setStoreName(storeName);
+        drr.setAddress(address);
+        drr.setPhoneNumber(phone);
+        drr.setUserName(userName);
+        drr.setPassword(password);
+        drr.setRequestDate(new Date());
 
-        system.getWorkQueue().getWorkRequestList().add(srr);
+        system.getWorkQueue().getWorkRequestList().add(drr);
         JOptionPane.showMessageDialog(this, "Your registation has been sent, please wait for approval!", "Information", JOptionPane.DEFAULT_OPTION);
-        storeNameTextField.setText("");
+        deliveryAgentNameTextField.setText("");
         addressTextArea.setText("");
-        storePhoneTextField.setText("");
+        deliveryAgentPhoneTextField.setText("");
         userNameTextField.setText("");
         passwordJPasswordField.setText("");
-
     }//GEN-LAST:event_registerJButtonActionPerformed
-
-    private void backJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButton1ActionPerformed
-        loginJPanel.remove(this);
-        CardLayout layout = (CardLayout) loginJPanel.getLayout();
-        layout.previous(loginJPanel);
-    }//GEN-LAST:event_backJButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea addressTextArea;
     private javax.swing.JLabel addressjLabel;
-    private javax.swing.JButton backJButton1;
+    private javax.swing.JButton backJButton;
+    private javax.swing.JTextField deliveryAgentNameTextField;
+    private javax.swing.JTextField deliveryAgentPhoneTextField;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPasswordField passwordJPasswordField;
     private javax.swing.JButton registerJButton;
-    private javax.swing.JTextField storeNameTextField;
     private javax.swing.JLabel storeNamejLabel;
-    private javax.swing.JTextField storePhoneTextField;
     private javax.swing.JTextField userNameTextField;
     // End of variables declaration//GEN-END:variables
 }
