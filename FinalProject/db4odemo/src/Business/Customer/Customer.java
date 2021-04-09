@@ -11,13 +11,13 @@ import Business.Business.Person;
  *
  * @author tzm
  */
-public class Customer extends Person{
+public class Customer extends Person {
 
     private int id;
 
     private String address;
     private String phone;
-    private String email;
+
     private static int count = 1;
 
     public Customer() {
@@ -35,14 +35,6 @@ public class Customer extends Person{
 
     public void setAddress(String addr) {
         this.address = addr;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPhone() {
