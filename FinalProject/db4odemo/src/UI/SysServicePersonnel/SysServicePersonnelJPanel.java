@@ -9,8 +9,7 @@ import Business.Business.EcoSystem;
 import Business.Business.Person;
 import Business.Enterprise.DeliveryAgent;
 import Business.Enterprise.Enterprise;
-import static Business.Enterprise.Enterprise.EnterpriseType.DeliveryAgent;
-import static Business.Enterprise.Enterprise.EnterpriseType.Store;
+
 import Business.Enterprise.Store;
 import Business.Organization.Organization;
 import Business.Role.DeliveryAgentAdminRoll;

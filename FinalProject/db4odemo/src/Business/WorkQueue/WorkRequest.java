@@ -26,6 +26,30 @@ public abstract class WorkRequest {
 
     }
 
+    public String getSenderMessage() {
+        return senderMessage;
+    }
+
+    public String getReceiverMessage() {
+        return receiverMessage;
+    }
+
+    public UserAccount getSender() {
+        return sender;
+    }
+
+    public void setSender(UserAccount sender) {
+        this.sender = sender;
+    }
+
+    public UserAccount getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(UserAccount receiver) {
+        this.receiver = receiver;
+    }
+
     public void setSenderMessage(String senderMessage) {
         this.senderMessage = senderMessage;
     }
@@ -70,6 +94,5 @@ public abstract class WorkRequest {
     public String toString() {
         return status.getValue();
     }
-    
 
 }

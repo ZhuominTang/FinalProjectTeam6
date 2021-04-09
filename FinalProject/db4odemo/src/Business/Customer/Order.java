@@ -7,6 +7,7 @@ package Business.Customer;
 
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.Item;
+import Business.UserAccount.UserAccount;
 
 import Business.WorkQueue.WorkRequest;
 import java.util.HashMap;
@@ -20,19 +21,11 @@ public class Order extends WorkRequest {
 
     private HashMap<Item, Integer> orderItem;
     private Enterprise enterprise;
-    private String StoreMessage;
+   
 
     public Order() {
         super();
         this.orderItem = new HashMap<Item, Integer>();
-    }
-
-    public String getStoreMessage() {
-        return StoreMessage;
-    }
-
-    public void setStoreMessage(String StoreMessage) {
-        this.StoreMessage = StoreMessage;
     }
 
     public HashMap<Item, Integer> getOrderItem() {
