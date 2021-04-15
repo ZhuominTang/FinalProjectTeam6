@@ -18,6 +18,7 @@ public abstract class Enterprise extends Organization {
     private OrganizationDirectory organizationDirectory;
     private String address;
     private String phoneNumber;
+
     public OrganizationDirectory getOrganizationDirectory() {
         return organizationDirectory;
     }
@@ -65,11 +66,17 @@ public abstract class Enterprise extends Organization {
         this.enterpriseType = type;
         organizationDirectory = new OrganizationDirectory();
     }
-     public String getPhoneNumber() {
+
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return this.getName();
     }
 }
