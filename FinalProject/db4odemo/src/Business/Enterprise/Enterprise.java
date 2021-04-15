@@ -16,9 +16,18 @@ public abstract class Enterprise extends Organization {
 
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDirectory;
-
+    private String address;
+    private String phoneNumber;
     public OrganizationDirectory getOrganizationDirectory() {
         return organizationDirectory;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public enum EnterpriseType {
@@ -55,5 +64,12 @@ public abstract class Enterprise extends Organization {
         super(name);
         this.enterpriseType = type;
         organizationDirectory = new OrganizationDirectory();
+    }
+     public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

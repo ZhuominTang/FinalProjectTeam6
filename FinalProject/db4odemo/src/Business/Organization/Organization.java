@@ -6,6 +6,7 @@ package Business.Organization;
 
 import Business.Employee.EmployeeDirectory;
 import Business.Role.Role;
+import Business.UserAccount.UserAccount;
 import Business.UserAccount.UserAccountDirectory;
 import Business.WorkQueue.WorkQueue;
 import java.util.ArrayList;
@@ -55,7 +56,11 @@ public abstract class Organization {
     }
 
     public Organization() {
-
+        workQueue = new WorkQueue();
+        employeeDirectory = new EmployeeDirectory();
+        userAccountDirectory = new UserAccountDirectory();
+        organizationID = counter;
+        ++counter;
     }
 
     public abstract ArrayList<Role> getSupportedRole();
@@ -91,6 +96,22 @@ public abstract class Organization {
     @Override
     public String toString() {
         return name;
+    }
+
+    public ArrayList<UserAccount> searchUserAccountByUsername(String s) {
+        ArrayList<UserAccount> result = new ArrayList<>();
+        if (!this.userAccountDirectory.getUserAccountList().isEmpty()) {
+            for (UserAccount ua : this.userAccountDirectory.getUserAccountList()) {
+
+                if (ua.getUsername().toLowerCase().contains(s.toLowerCase())) {
+                    if (!result.contains(ua)) {
+                        result.add(ua);
+                    }
+                }
+
+            }
+        }
+        return result;
     }
 
 }

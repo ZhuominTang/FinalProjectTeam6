@@ -6,9 +6,20 @@
 package UI.SystemAdmin;
 
 import Business.Business.EcoSystem;
+import Business.Employee.Employee;
+import Business.Enterprise.CustomerCenter;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Organization;
+import Business.Role.SysServicePersonnelRole;
 import Business.UserAccount.UserAccount;
+import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,6 +42,9 @@ public class SysAdminJPanel extends javax.swing.JPanel {
         this.system = system;
         this.frame = frame;
         this.setSize(900, 640);
+        populateServicePersonnelJTable();
+        populateCustomerJTable();
+        populateCustomerSortJComboBox();
     }
 
     /**
@@ -43,34 +57,329 @@ public class SysAdminJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        servicePersonnelJTable = new javax.swing.JTable();
+        btnDelete = new javax.swing.JButton();
+        txtEmployeeFirstName = new javax.swing.JTextField();
+        lblName = new javax.swing.JLabel();
+        btnSubmit1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        userNameTextField = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        passwordJPasswordField = new javax.swing.JPasswordField();
+        lblName1 = new javax.swing.JLabel();
+        txtEmployeeLastName = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        customerJTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        searchTextField = new javax.swing.JTextField();
+        searchButton = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
+        customerSortJComboBox = new javax.swing.JComboBox();
+        customerDetailButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        sortButton = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 895, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 612, Short.MAX_VALUE)
-        );
+        servicePersonnelJTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Name", "UserName"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
 
-        jTabbedPane1.addTab("Overview", jPanel1);
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(servicePersonnelJTable);
+
+        btnDelete.setFont(new java.awt.Font("宋体", 1, 12)); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        txtEmployeeFirstName.setFont(new java.awt.Font("宋体", 0, 12)); // NOI18N
+
+        lblName.setFont(new java.awt.Font("宋体", 1, 18)); // NOI18N
+        lblName.setText("EmployeeFirstName:");
+
+        btnSubmit1.setFont(new java.awt.Font("宋体", 1, 12)); // NOI18N
+        btnSubmit1.setText("Submit");
+        btnSubmit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmit1ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("宋体", 1, 18)); // NOI18N
+        jLabel8.setText("UserName:");
+
+        userNameTextField.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("宋体", 1, 18)); // NOI18N
+        jLabel9.setText("Password:");
+
+        passwordJPasswordField.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
+
+        lblName1.setFont(new java.awt.Font("宋体", 1, 18)); // NOI18N
+        lblName1.setText("EmployeeLastName:");
+
+        txtEmployeeLastName.setFont(new java.awt.Font("宋体", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 895, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(129, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblName)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel8))
+                                .addGap(27, 27, 27)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtEmployeeLastName)
+                                    .addComponent(txtEmployeeFirstName)
+                                    .addComponent(userNameTextField)
+                                    .addComponent(passwordJPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(200, 200, 200))
+                            .addComponent(btnSubmit1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblName1))
+                .addGap(103, 103, 103))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 612, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblName)
+                    .addComponent(txtEmployeeFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblName1)
+                    .addComponent(txtEmployeeLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(userNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(passwordJPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnSubmit1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Manage Service personnel", jPanel2);
+
+        customerJTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "UserName", "Quantity Of Completed Order", "Total Purchased "
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(customerJTable);
+
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel1.setText("Search:");
+
+        searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
+
+        refreshButton.setText("Refresh");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButtonActionPerformed(evt);
+            }
+        });
+
+        customerSortJComboBox.setFont(new java.awt.Font("宋体", 1, 14)); // NOI18N
+        customerSortJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        customerSortJComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customerSortJComboBoxActionPerformed(evt);
+            }
+        });
+
+        customerDetailButton.setText("View The Custmoer Detail");
+        customerDetailButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customerDetailButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel2.setText("Sorted By:");
+
+        sortButton.setText("Sort");
+        sortButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(customerSortJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(sortButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(customerDetailButton))
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(refreshButton))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(146, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchButton)
+                    .addComponent(refreshButton))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(customerSortJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customerDetailButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sortButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(263, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Manage Customers", jPanel1);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 931, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 664, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Manage Stores", jPanel3);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 931, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 664, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Manage DeliveryAgents", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -84,10 +393,250 @@ public class SysAdminJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSubmit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmit1ActionPerformed
+
+        String firstName = txtEmployeeFirstName.getText();
+        String lastName = txtEmployeeLastName.getText();
+        String userName = userNameTextField.getText();
+        String password = String.valueOf(passwordJPasswordField.getPassword());
+        if (firstName.trim().equals("") || lastName.trim().equals("") || userName.trim().equals("") || password.trim().equals("")) {
+
+            JOptionPane.showMessageDialog(this, "Input cannot be empty", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+
+        }
+
+        Boolean used = false;
+
+        for (UserAccount ua : system.getUserAccountDirectory().getUserAccountList()) {
+            if (userName.equals(ua.getUsername())) {
+
+                used = true;
+                break;
+            }
+
+        }
+
+        if (used == false) {
+            Label1:
+            for (Enterprise en : system.getEnterpriseDirectory().getEnterpriseList()) {
+
+                for (Organization org : en.getOrganizationDirectory().getOrganizationList()) {
+                    for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
+                        if (userName.equals(ua.getUsername())) {
+
+                            used = true;
+                            break Label1;
+
+                        }
+
+                    }
+                }
+
+            }
+        }
+        if (used == true) {
+
+            JOptionPane.showMessageDialog(this, "UserName has been used", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+
+        }
+        UserAccount uss = new UserAccount();
+        uss.setUsername(userName);
+        uss.setPassword(password);
+        uss.setRole(new SysServicePersonnelRole());
+        Employee emp = new Employee();
+        emp.setFirstName(firstName);
+        emp.setLastName(lastName);
+        uss.setPerson(emp);
+        system.getEmployeeDirectory().getEmployeeList().add(emp);
+        system.getUserAccountDirectory().getUserAccountList().add(uss);
+        txtEmployeeFirstName.setText("");
+        txtEmployeeLastName.setText("");
+        userNameTextField.setText("");
+        passwordJPasswordField.setText("");
+        populateServicePersonnelJTable();
+    }//GEN-LAST:event_btnSubmit1ActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int selectedRowIndex = servicePersonnelJTable.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        UserAccount ua = (UserAccount) servicePersonnelJTable.getValueAt(selectedRowIndex, 1);
+        system.getEmployeeDirectory().getEmployeeList().remove(ua.getPerson());
+        system.getUserAccountDirectory().getUserAccountList().remove(ua);
+        populateServicePersonnelJTable();
+
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        String s = searchTextField.getText();
+        ArrayList<UserAccount> result = null;
+        if (!s.trim().equals("")) {
+            for (Enterprise en : system.getEnterpriseDirectory().getEnterpriseList()) {
+                if (en instanceof CustomerCenter) {
+                    for (Organization org : en.getOrganizationDirectory().getOrganizationList()) {
+                        result = org.searchUserAccountByUsername(s);
+                    }
+                }
+            }
+
+            populateCustomerJTableByResult(result);
+        }
+        searchTextField.setText("");
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        populateCustomerJTable();
+    }//GEN-LAST:event_refreshButtonActionPerformed
+
+    private void customerSortJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerSortJComboBoxActionPerformed
+
+    }//GEN-LAST:event_customerSortJComboBoxActionPerformed
+
+    private void customerDetailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerDetailButtonActionPerformed
+        int selectedRowIndex = customerJTable.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        UserAccount ua = (UserAccount) customerJTable.getValueAt(selectedRowIndex, 0);
+        CustomerDetailJPanel cdjp = new CustomerDetailJPanel(userProcessContainer, ua);
+        userProcessContainer.add("CustomerDetailJPanel", cdjp);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_customerDetailButtonActionPerformed
+
+    private void sortButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortButtonActionPerformed
+        String s = (String) customerSortJComboBox.getSelectedItem();
+        Comparator<UserAccount> cpt = null;
+        ArrayList<UserAccount> list = null;
+        if (s.equals("Total Purchase")) {
+            cpt = (UserAccount u1, UserAccount u2)
+                    -> Double.compare(u1.getWorkQueue().calculateTotalPurchased(), u2.getWorkQueue().calculateTotalPurchased());
+        }
+
+        if (s.equals("Username")) {
+            cpt = (UserAccount u1, UserAccount u2)
+                    -> u1.getUsername().compareTo(u2.getUsername());
+        }
+
+        if (s.equals("Quantity")) {
+            cpt = (UserAccount u1, UserAccount u2)
+                    -> Integer.compare(u1.getWorkQueue().countCompletedOrder(), u2.getWorkQueue().countCompletedOrder());
+        }
+        for (Enterprise en : system.getEnterpriseDirectory().getEnterpriseList()) {
+            if (en instanceof CustomerCenter) {
+                for (Organization org : en.getOrganizationDirectory().getOrganizationList()) {
+                    list = copyList(org.getUserAccountDirectory().getUserAccountList());
+                }
+            }
+        }
+        Collections.sort(list, cpt);
+
+        populateCustomerJTableByResult(list);
+
+
+    }//GEN-LAST:event_sortButtonActionPerformed
+    private void populateServicePersonnelJTable() {
+        DefaultTableModel model = (DefaultTableModel) servicePersonnelJTable.getModel();
+
+        model.setRowCount(0);
+
+        for (UserAccount acc : system.getUserAccountDirectory().getUserAccountList()) {
+            if (acc.getRole() instanceof SysServicePersonnelRole) {
+                Object[] row = new Object[2];
+                row[0] = acc.getPerson().returnFullName();
+                row[1] = acc;
+                model.addRow(row);
+            }
+        }
+
+    }
+
+    private void populateCustomerJTable() {
+        DefaultTableModel model = (DefaultTableModel) customerJTable.getModel();
+
+        model.setRowCount(0);
+        for (Enterprise en : system.getEnterpriseDirectory().getEnterpriseList()) {
+            if (en instanceof CustomerCenter) {
+                for (Organization org : en.getOrganizationDirectory().getOrganizationList()) {
+                    for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
+                        Object[] row = new Object[3];
+                        row[0] = ua;
+                        row[1] = ua.getWorkQueue().countCompletedOrder();
+                        row[2] = ua.getWorkQueue().calculateTotalPurchased();
+                        model.addRow(row);
+                    }
+                }
+            }
+        }
+
+    }
+
+    private void populateCustomerSortJComboBox() {
+        customerSortJComboBox.removeAllItems();
+
+        customerSortJComboBox.addItem("Username");
+        customerSortJComboBox.addItem("Quantity");
+        customerSortJComboBox.addItem("Total Purchased");
+    }
+
+    public void populateCustomerJTableByResult(ArrayList<UserAccount> list) {
+        DefaultTableModel model = (DefaultTableModel) customerJTable.getModel();
+        model.setRowCount(0);
+        for (UserAccount ua : list) {
+
+            Object row[] = new Object[3];
+            row[0] = ua;
+            row[1] = ua.getWorkQueue().countCompletedOrder();
+            row[2] = ua.getWorkQueue().calculateTotalPurchased();
+
+            model.addRow(row);
+        }
+    }
+
+    private ArrayList<UserAccount> copyList(ArrayList<UserAccount> list) {
+        ArrayList<UserAccount> result = new ArrayList<>();
+        for (UserAccount u : list) {
+
+            result.add(u);
+
+        }
+        return result;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnSubmit1;
+    private javax.swing.JButton customerDetailButton;
+    private javax.swing.JTable customerJTable;
+    private javax.swing.JComboBox customerSortJComboBox;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblName1;
+    private javax.swing.JPasswordField passwordJPasswordField;
+    private javax.swing.JButton refreshButton;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JTextField searchTextField;
+    private javax.swing.JTable servicePersonnelJTable;
+    private javax.swing.JButton sortButton;
+    private javax.swing.JTextField txtEmployeeFirstName;
+    private javax.swing.JTextField txtEmployeeLastName;
+    private javax.swing.JTextField userNameTextField;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,22 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/UI/LoginJPanel.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/UI/RgtSJPanel.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/UI/MainJFrame.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/UI/LoginJFrame.java</file>
-
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/UI/RgtCJPanel.java</file>
-
-
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/UI/RgtCJPanel.java</file>
-
-
-
- main
-
-
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/UI/RegisterJPanel.java</file>
+            <file>file:/C:/Users/10643/Desktop/FinalProjectTeam6-main/FinalProjectTeam6-main/FinalProject/db4odemo/src/UI/Store/StoreManagerMainJPanel.java</file>
+            <file>file:/C:/Users/10643/Desktop/FinalProjectTeam6-main/FinalProjectTeam6-main/FinalProject/db4odemo/src/UI/MainJFrame.java</file>
+            <file>file:/C:/Users/10643/Desktop/FinalProjectTeam6-main/FinalProjectTeam6-main/FinalProject/db4odemo/src/UI/SystemAdmin/SysAdminJPanel.java</file>
+            <file>file:/C:/Users/10643/Desktop/FinalProjectTeam6-main/FinalProjectTeam6-main/FinalProject/db4odemo/src/Business/Business/ConfigureASystem.java</file>
+            <file>file:/C:/Users/10643/Desktop/FinalProjectTeam6-main/FinalProjectTeam6-main/FinalProject/db4odemo/src/UI/Store/CreateEmployeeJPanel.java</file>
         </group>
     </open-files>
 </project-private>

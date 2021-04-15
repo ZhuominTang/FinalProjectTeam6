@@ -24,16 +24,16 @@ public class RegisterJPanel extends javax.swing.JPanel {
     private EcoSystem system;
     private JPanel loginJPanel;
 
-    private DB4OUtil dB4OUtil;
+
 
     /**
      * Creates new form LoginJPanel
      */
-    public RegisterJPanel(EcoSystem system, JPanel loginJPanel, DB4OUtil dB4OUtil) {
+    public RegisterJPanel(EcoSystem system, JPanel loginJPanel) {
         initComponents();
         this.system = system;
         this.loginJPanel = loginJPanel;
-        this.dB4OUtil = dB4OUtil;
+      
         this.setSize(300, 500);
     }
 
@@ -122,11 +122,17 @@ public class RegisterJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void storeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeJButtonActionPerformed
-
+        RgtSJPanel rsj = new RgtSJPanel(system, loginJPanel);
+        loginJPanel.add(rsj);
+        CardLayout layout = (CardLayout) loginJPanel.getLayout();
+        layout.next(loginJPanel);
     }//GEN-LAST:event_storeJButtonActionPerformed
 
     private void deliveryAgentJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliveryAgentJButtonActionPerformed
-        // TODO add your handling code here:
+        RgtDJPanel rsd = new RgtDJPanel(system, loginJPanel);
+        loginJPanel.add(rsd);
+        CardLayout layout = (CardLayout) loginJPanel.getLayout();
+        layout.next(loginJPanel);
     }//GEN-LAST:event_deliveryAgentJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
@@ -136,7 +142,10 @@ public class RegisterJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_backJButtonActionPerformed
 
     private void customerJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerJButtonActionPerformed
-        // TODO add your handling code here:
+        RgtCJPanel rcj = new RgtCJPanel(system, loginJPanel);
+        loginJPanel.add(rcj);
+        CardLayout layout = (CardLayout) loginJPanel.getLayout();
+        layout.next(loginJPanel);
     }//GEN-LAST:event_customerJButtonActionPerformed
 
 

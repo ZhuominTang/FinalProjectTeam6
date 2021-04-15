@@ -12,14 +12,31 @@ import java.util.ArrayList;
  *
  * @author tzm
  */
-public class Store extends Enterprise{
-    ItemDirectory itemDirectory;
-     public Store (String name){
-        super(name,Enterprise.EnterpriseType.Store);
+public class Store extends Enterprise {
+
+    private ItemDirectory itemDirectory;
+
+    public Store(String name) {
+        super(name, Enterprise.EnterpriseType.Store);
         itemDirectory = new ItemDirectory();
     }
+
     @Override
+
     public ArrayList<Role> getSupportedRole() {
         return null;
     }
+
+    public ItemDirectory getItemDirectory() {
+        return itemDirectory;
+    }
+
+    public void setItemDirectory(ItemDirectory itemDirectory) {
+        this.itemDirectory = itemDirectory;
+    }
+    
+    public void addProductToList(Item item) {
+        this.getItemDirectory().createItem();
+    }    
+
 }

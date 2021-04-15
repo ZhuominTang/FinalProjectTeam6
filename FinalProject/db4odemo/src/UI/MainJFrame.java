@@ -25,16 +25,16 @@ public class MainJFrame extends javax.swing.JFrame {
     private UserAccount account;
     private Enterprise enterprise;
     private Organization organization;
-    private DB4OUtil dB4OUtil;
+    
 
-    public MainJFrame(EcoSystem system, UserAccount account, Enterprise enterprise, Organization organization, DB4OUtil dB4OUtil) {
+    public MainJFrame(EcoSystem system, UserAccount account, Enterprise enterprise, Organization organization) {
         initComponents();
 
         this.system = system;
         this.account = account;
         this.enterprise = enterprise;
         this.organization = organization;
-        this.dB4OUtil = dB4OUtil;
+        
         this.setSize(900, 700);
         CardLayout layout = (CardLayout) container.getLayout();
         container.add("workArea", account.getRole().createWorkArea( container,account,organization,enterprise,system,this));
@@ -73,8 +73,9 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 843, Short.MAX_VALUE)
-                .addComponent(jButtonExit, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(833, Short.MAX_VALUE)
+                .addComponent(jButtonExit, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,7 +107,7 @@ public class MainJFrame extends javax.swing.JFrame {
         this.dispose();
         ljf.setLocationRelativeTo(null);
         ljf.setVisible(true);
-        dB4OUtil.storeSystem(system);// TODO add your handling code here:
+        DB4OUtil.getInstance().storeSystem(system);// TODO add your handling code here:
     }//GEN-LAST:event_jButtonExitActionPerformed
 
     /**
