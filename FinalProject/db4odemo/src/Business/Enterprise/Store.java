@@ -36,7 +36,7 @@ public class Store extends Enterprise {
     }
     
     public void addProductToList(Item item) {
-        this.getItemDirectory().createItem();
+        this.getItemDirectory().getItemDirectory().add(item);
     }    
 
 }

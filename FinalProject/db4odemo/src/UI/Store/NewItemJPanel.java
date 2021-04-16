@@ -135,8 +135,7 @@ public class NewItemJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Information can't be empty!");
                 return;
             }
-            BigDecimal bd = new BigDecimal(price);
-            Item item = new Item(name, price);
+                Item item = new Item(name, price);
                 store.addProductToList(item);
                 DB4OUtil.getInstance().storeSystem(system);
                 StoreManagerMainJPanel p = (StoreManagerMainJPanel) panel;

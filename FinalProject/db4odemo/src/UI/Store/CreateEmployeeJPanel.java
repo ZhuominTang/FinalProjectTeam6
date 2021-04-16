@@ -10,6 +10,7 @@ import Business.DB4OUtil.DB4OUtil;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
+import Business.Organization.StoreReceptionistOrganization;
 import Business.Role.Role;
 import Business.Role.Role.RoleType;
 import Business.Role.StoreDistributionPersonnelRole;
@@ -33,13 +34,12 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
     private JPanel workPanel;
     private Role role;
     
-    public CreateEmployeeJPanel(EcoSystem system, JPanel panel, JPanel workPanel, Enterprise en, Role role) {
+    public CreateEmployeeJPanel(EcoSystem system, JPanel panel, JPanel workPanel, Enterprise en) {
         initComponents();
         this.system = system;
         this.panel = panel;
         this.workPanel = workPanel;
         this.en = en;
-        this.role = role;
         roleComboBox.addItem(Role.RoleType.StoreReceptionist);
         roleComboBox.addItem(Role.RoleType.StoreDistributionPersonnel);
     }
@@ -239,8 +239,7 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         if (roleComboBox.getSelectedItem() != null) {
-            if (!this.usernameTextField.getText().equals("")
-                && system.checkIfUserIsUnique(this.usernameTextField.getText())) {
+            
                 char[] passwordCharArray1 = passwordField1.getPassword();
                 String new1 = String.valueOf(passwordCharArray1);
                 char[] passwordCharArray2 = passwordField2.getPassword();
@@ -255,18 +254,25 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
                             em.setLastName(lastNameTextField.getText());
                             em.setAddress(phoneTextField.getText());
                             em.setPhone(emailTextField.getText());
-                            en.getUserAccountDirectory().createUserAccount(this.usernameTextField.getText(), new2, em, new StoreReceptionistRole());
+                            for (Organization org : en.getOrganizationDirectory().getOrganizationList()){
+                                if(org instanceof StoreReceptionistOrganization)
+                                org.getUserAccountDirectory().createUserAccount(this.usernameTextField.getText(), new2, em, new StoreReceptionistRole());
+                            }
                         } else if (roleComboBox.getSelectedItem().equals(Role.RoleType.StoreDistributionPersonnel)){
                             Employee em = new Employee();
                             em.setFirstName(firstNameTextField.getText());
                             em.setLastName(lastNameTextField.getText());
                             em.setAddress(phoneTextField.getText());
                             em.setPhone(emailTextField.getText());
-                            en.getUserAccountDirectory().createUserAccount(this.usernameTextField.getText(), new2, em, new StoreDistributionPersonnelRole());
+                            for (Organization org : en.getOrganizationDirectory().getOrganizationList()){
+                                if(org instanceof StoreReceptionistOrganization)
+                                org.getUserAccountDirectory().createUserAccount(this.usernameTextField.getText(), new2, em, new StoreDistributionPersonnelRole());
+                            }
                         }
                         // Save
                         DB4OUtil.getInstance().storeSystem(system);
-
+                        StoreManagerMainJPanel p = (StoreManagerMainJPanel) panel;
+                        p.populateEmployeeTable();
                         this.workPanel.remove(this);
                         CardLayout layout = (CardLayout) this.workPanel.getLayout();
                         layout.previous(this.workPanel);
@@ -277,12 +283,10 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Information can't be empty!");
                 }
 
-            } else {
-                JOptionPane.showMessageDialog(null, "Username alreay exists!");
-            }
         } else {
             JOptionPane.showMessageDialog(null, "Please select a role!");
         }
+        
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void roleComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleComboBoxActionPerformed

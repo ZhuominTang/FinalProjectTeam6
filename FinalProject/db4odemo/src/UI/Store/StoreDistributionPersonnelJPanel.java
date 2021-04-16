@@ -11,8 +11,12 @@ import Business.Enterprise.Store;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.WorkQueue;
+import Business.WorkQueue.WorkRequest;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -42,6 +46,9 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.store = (Store) enterprise;
         this.setSize(900, 640);
+        
+        populateorderTable();
+        //populateDetailTable();
     }
 
     /**
@@ -81,17 +88,17 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
 
         orderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Order Date", "Name", "Phone", "Amount", "Status"
+                "Order Date", "Name", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -184,7 +191,12 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelOrderButtonActionPerformed
 
     private void orderTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderTableMouseClicked
+        int index = orderTable.getSelectedRow();
 
+        //if (index >= 0) {
+            //selectedOrder = (OrderRequest) orderTable.getValueAt(index, 0);
+            //populateDetailTable(selectedOrder);
+        //}
     }//GEN-LAST:event_orderTableMouseClicked
 
 
@@ -198,4 +210,23 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
     private javax.swing.JTable orderDetailTable;
     private javax.swing.JTable orderTable;
     // End of variables declaration//GEN-END:variables
+
+    private void populateorderTable() {
+        DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
+        dtm.setRowCount(0);
+        for (WorkRequest wr : store.getWorkQueue().getWorkRequestList()) {
+            Object row[] = new Object[3];
+            row[0] = wr.getRequestDate();
+            row[1] = wr.getSender();
+            row[2] = wr.getStatus();
+            dtm.addRow(row);
+        }
+    }
+
+    private void populateDetailTable(WorkQueue wq) {
+        DefaultTableModel dtm = (DefaultTableModel) orderDetailTable.getModel();
+        dtm.setRowCount(0);
+        ArrayList<WorkRequest> list = wq.getWorkRequestList();
+        
+    }
 }

@@ -23,7 +23,7 @@ public class StoreAdminRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system,JFrame frame) {
-        return new StoreManagerMainJPanel(userProcessContainer, organization, account, system, frame);
+        return new StoreManagerMainJPanel(userProcessContainer, organization, enterprise, account, system, frame);
     }
 
 }

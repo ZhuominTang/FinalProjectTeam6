@@ -7,6 +7,7 @@ package UI.Store;
 
 import Business.Business.EcoSystem;
 import Business.DB4OUtil.DB4OUtil;
+import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.Item;
 import Business.Enterprise.Store;
@@ -42,20 +43,20 @@ public class StoreManagerMainJPanel extends javax.swing.JPanel {
     private Role role;
     private Enterprise enterprise;
     
-    public StoreManagerMainJPanel(JPanel userProcessContainer, Organization organization, UserAccount account, EcoSystem system, JFrame frame) {
+    public StoreManagerMainJPanel(JPanel userProcessContainer, Organization organization, Enterprise enterprise, UserAccount account, EcoSystem system, JFrame frame) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
         this.system = system;
         this.frame = frame;
         this.organization = organization;
-        this.role = role;
-        this.store = (Store) organization;
+        this.enterprise = enterprise;
+        this.store = (Store) enterprise;
         
         this.setSize(900, 640);
         
         populateItemTable();
-        populateEmployeeTable(store.getOrganizationDirectory().getOrganizationList());
+        populateEmployeeTable();
         populateReviewTable();
         
         // Overview Panel
@@ -198,7 +199,7 @@ public class StoreManagerMainJPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Username", "Role", "Name", "Email"
+                "Username", "Role", "phone", "adress"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -526,7 +527,13 @@ public class StoreManagerMainJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void ItemTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ItemTableMouseClicked
+        int index = ItemTable.getSelectedRow();
 
+        if (index >= 0) {
+            Item item = (Item) ItemTable.getValueAt(index, 0);
+            
+            jButton2.setEnabled(true);
+        }
     }//GEN-LAST:event_ItemTableMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -534,6 +541,7 @@ public class StoreManagerMainJPanel extends javax.swing.JPanel {
         this.createPanel.add(p);
         CardLayout layout = (CardLayout)createPanel.getLayout();
         layout.next(createPanel);
+        populateItemTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -554,7 +562,7 @@ public class StoreManagerMainJPanel extends javax.swing.JPanel {
 
     private void createButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButton1ActionPerformed
         this.workPanel.removeAll();
-        CreateEmployeeJPanel ep = new CreateEmployeeJPanel(this.system, this, this.workPanel, this.enterprise, this.role);
+        CreateEmployeeJPanel ep = new CreateEmployeeJPanel(this.system, this, this.workPanel, this.enterprise);
         this.workPanel.add(ep);
         CardLayout layout = (CardLayout) this.workPanel.getLayout();
         layout.next(this.workPanel);
@@ -661,25 +669,22 @@ public class StoreManagerMainJPanel extends javax.swing.JPanel {
         jButton2.setEnabled(false);
     }
 
-    private void populateEmployeeTable(ArrayList<Organization> list) {
-        ArrayList<UserAccount> result = new ArrayList<>();
-
-        result.addAll(this.enterprise.getUserAccountDirectory().getUserAccountList());
-
-        for (Organization org : list) {
-            result.addAll(org.getUserAccountDirectory().getUserAccountList());
-        }
-
+    public void populateEmployeeTable() {
         DefaultTableModel dtm = (DefaultTableModel) employeeTable.getModel();
         dtm.setRowCount(0);
-        for (UserAccount e : result) {
-            Object row[] = new Object[4];
-            row[0] = e;
-            row[1] = e.getRole();
-            row[2] = e.getPerson().getFirstName();
-            row[3] = e.getPerson();
-            dtm.addRow(row);
+        for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()){
+            for (UserAccount e : org.getUserAccountDirectory().getUserAccountList()) {
+                Object row[] = new Object[4];
+                row[0] = e;
+                row[1] = e.getRole().toString();
+                row[2] = ((Employee)e.getPerson()).getPhone();
+                row[3] = ((Employee)e.getPerson()).getAddress();
+                dtm.addRow(row);
+            }
         }
+
+
+        
     }
 
     private void populateReviewTable() {

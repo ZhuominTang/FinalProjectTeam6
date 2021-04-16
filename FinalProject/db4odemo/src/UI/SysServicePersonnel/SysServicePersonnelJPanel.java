@@ -8,6 +8,7 @@ package UI.SysServicePersonnel;
 import Business.Business.EcoSystem;
 import Business.Business.Person;
 import Business.DB4OUtil.DB4OUtil;
+import Business.Employee.Employee;
 import Business.Enterprise.DeliveryAgent;
 import Business.Enterprise.Enterprise;
 
@@ -488,7 +489,7 @@ public class SysServicePersonnelJPanel extends javax.swing.JPanel {
 
         s.setAddress(srr.getAddress());
         s.setPhoneNumber(srr.getPhoneNumber());
-        org.getUserAccountDirectory().createUserAccount(srr.getUserName(), srr.getPassword(), new Person(), new StoreAdminRole());
+        org.getUserAccountDirectory().createUserAccount(srr.getUserName(), srr.getPassword(), new Employee(), new StoreAdminRole());
         populateStoreRegistrationJTable();
 
     }//GEN-LAST:event_btnStoreAcceptActionPerformed
