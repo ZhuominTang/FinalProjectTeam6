@@ -9,6 +9,7 @@ import Business.Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import UI.Store.StoreDistributionPersonnelJPanel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -19,7 +20,7 @@ import javax.swing.JPanel;
 public class StoreDistributionPersonnelRole extends Role {
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system,JFrame frame) {
-        return null;
+        return new StoreDistributionPersonnelJPanel(userProcessContainer, organization, enterprise, account, system, frame);
     }
     
 }

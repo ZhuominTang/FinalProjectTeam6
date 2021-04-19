@@ -289,8 +289,8 @@ public class StoreManagerMainJPanel extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(79, 79, 79)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 762, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 788, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -676,7 +676,7 @@ public class StoreManagerMainJPanel extends javax.swing.JPanel {
             for (UserAccount e : org.getUserAccountDirectory().getUserAccountList()) {
                 Object row[] = new Object[4];
                 row[0] = e;
-                row[1] = e.getRole().toString();
+                row[1] = e.getRole();
                 row[2] = ((Employee)e.getPerson()).getPhone();
                 row[3] = ((Employee)e.getPerson()).getAddress();
                 dtm.addRow(row);
