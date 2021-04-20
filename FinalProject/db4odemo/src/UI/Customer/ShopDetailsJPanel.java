@@ -13,6 +13,7 @@ import Business.Enterprise.Item;
 import Business.Enterprise.Store;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.CustomerContactRequest;
+import static Business.WorkQueue.Status.Waiting;
 
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
@@ -427,6 +428,7 @@ public class ShopDetailsJPanel extends javax.swing.JPanel {
         ccr.setSender(account);
         ccr.setRequestDate(new Date());
         ccr.setSenderMessage(messageJTextField.getText());
+        ccr.setStatus(Waiting);
         enterprise.getWorkQueue().getWorkRequestList().add(ccr);
         account.getWorkQueue().getWorkRequestList().add(ccr);
         JOptionPane.showMessageDialog(this, "The message has been sent!", "Information", JOptionPane.DEFAULT_OPTION);

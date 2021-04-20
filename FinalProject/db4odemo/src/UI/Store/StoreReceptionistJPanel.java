@@ -51,6 +51,12 @@ public class StoreReceptionistJPanel extends javax.swing.JPanel {
         this.setSize(900, 640);
         
         populateMessageTable();
+        setProfileFieldsEditable(false);
+        setProfileInfo();
+        
+        saveButton1.setEnabled(false);
+        cancelButton2.setEnabled(false);
+        editButton1.setEnabled(true);
     }
 
     /**
@@ -532,14 +538,14 @@ public class StoreReceptionistJPanel extends javax.swing.JPanel {
                 CustomerContactRequest ccr = (CustomerContactRequest) wr;
                 Object[] row = new Object[5];
                 row[0] = ccr.getRequestDate();
-                row[1] = ccr.getSender().getUsername();
+                row[1] = ccr.getSender();
                 row[2] = ccr;
                 row[3] = ccr.getSenderMessage();
                 row[4] = ccr.getReceiverMessage();
-
-                model.addRow(row);
-                
+                model.addRow(row);               
             }
         }
     }
+
+
 }

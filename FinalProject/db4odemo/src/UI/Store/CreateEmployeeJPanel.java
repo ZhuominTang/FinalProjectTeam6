@@ -15,6 +15,7 @@ import Business.Role.Role;
 import Business.Role.Role.RoleType;
 import Business.Role.StoreDistributionPersonnelRole;
 import Business.Role.StoreReceptionistRole;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -244,9 +245,35 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
                 String new1 = String.valueOf(passwordCharArray1);
                 char[] passwordCharArray2 = passwordField2.getPassword();
                 String new2 = String.valueOf(passwordCharArray2);
+                String userName = usernameTextField.getText();
+                
+                Boolean used = false;
 
                 if (!emailTextField.getText().equals("") && !firstNameTextField.getText().equals("") && !new1.equals("") && !new2.equals("")
                     && !lastNameTextField.getText().equals("") && !phoneTextField.getText().equals("")) {
+                    for (UserAccount ua : system.getUserAccountDirectory().getUserAccountList()) {
+                        if (userName.equals(ua.getUsername())) {
+                            used = true;
+                            break;
+                        }
+                    }
+                    if (used == false) {
+                     Label1:
+                        for (Enterprise en : system.getEnterpriseDirectory().getEnterpriseList()) {
+                            for (Organization org : en.getOrganizationDirectory().getOrganizationList()) {
+                                for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
+                                    if (userName.equals(ua.getUsername())) {
+                                        used = true;
+                                        break Label1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (used == true) {
+                        JOptionPane.showMessageDialog(this, "UserName has been used", "Warning", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
                     if (new1.equals(new2)) {
                         if (roleComboBox.getSelectedItem().equals(Role.RoleType.StoreReceptionist)) {
                             Employee em = new Employee();

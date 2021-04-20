@@ -6,6 +6,7 @@
 package UI.Store;
 
 import Business.Business.EcoSystem;
+import Business.Customer.Order;
 import Business.DB4OUtil.DB4OUtil;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
@@ -53,13 +54,11 @@ public class StoreManagerMainJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.store = (Store) enterprise;
         
-        this.setSize(900, 640);
+        this.setSize(1000, 640);
         
         populateItemTable();
         populateEmployeeTable();
         populateReviewTable();
-        
-        // Overview Panel
         editButton.setEnabled(true);
         saveButton.setEnabled(false);
         cancelButton.setEnabled(false);
@@ -163,7 +162,7 @@ public class StoreManagerMainJPanel extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(72, Short.MAX_VALUE)
+                .addContainerGap(95, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,7 +289,7 @@ public class StoreManagerMainJPanel extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(79, 79, 79)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 788, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,7 +351,7 @@ public class StoreManagerMainJPanel extends javax.swing.JPanel {
                         .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cancelButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(305, Short.MAX_VALUE))
+                .addContainerGap(328, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -447,7 +446,7 @@ public class StoreManagerMainJPanel extends javax.swing.JPanel {
                         .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(388, Short.MAX_VALUE))
+                .addContainerGap(411, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -691,16 +690,18 @@ public class StoreManagerMainJPanel extends javax.swing.JPanel {
         DefaultTableModel dtm = (DefaultTableModel) reviewTable.getModel();
         dtm.setRowCount(0);
         for (WorkRequest wr : store.getWorkQueue().getWorkRequestList()) {
+            if(wr instanceof Order){
+                Order order = (Order) wr;
                 Object row[] = new Object[7];
-                row[0] = wr.getRequestDate();
-                row[1] = wr.getResolveDate();
-                row[2] = wr.getSender().getUsername();
-                row[3] = wr.getReceiver().getUsername();
-                row[4] = wr.getStatus();
-                row[5] = wr.getSenderMessage();
-                row[6] = wr.getReceiverMessage();
+                row[0] = order.getRequestDate();
+                row[1] = order.getResolveDate();
+                row[2] = order.getSender();
+                row[3] = order.getReceiver();
+                row[4] = order.getStatus();
+                row[5] = order.getSenderMessage();
+                row[6] = order.getReceiverMessage();
                 dtm.addRow(row);
-
+            }
         }
     }
 }

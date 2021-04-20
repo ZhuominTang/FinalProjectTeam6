@@ -49,9 +49,6 @@ public abstract class Role {
 
     public abstract JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system,JFrame frame);
 
-    @Override
-    public String toString() {
-        return this.getClass().getName();
-    }
+    
 
 }

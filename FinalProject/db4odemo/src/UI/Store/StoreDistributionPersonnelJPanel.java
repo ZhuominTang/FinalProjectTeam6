@@ -55,9 +55,14 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.store = (Store) enterprise;
         employee = (Employee) account.getPerson();
-        this.setSize(900, 640);
+        this.setSize(920, 700);
         
         populateorderTable();
+        setProfileFieldsEditable(false);
+        setProfileInfo();
+        saveButton1.setEnabled(false);
+        cancelButton2.setEnabled(false);
+        editButton1.setEnabled(true);
     }
 
     /**
@@ -80,6 +85,8 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
         orderDetailTable = new javax.swing.JTable();
         ChooseDeliveryCompanyPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        TotalPriceTextField = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         addressTextField = new javax.swing.JTextField();
         cancelButton2 = new javax.swing.JButton();
@@ -168,19 +175,13 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(orderDetailTable);
 
-        javax.swing.GroupLayout ChooseDeliveryCompanyPanelLayout = new javax.swing.GroupLayout(ChooseDeliveryCompanyPanel);
-        ChooseDeliveryCompanyPanel.setLayout(ChooseDeliveryCompanyPanelLayout);
-        ChooseDeliveryCompanyPanelLayout.setHorizontalGroup(
-            ChooseDeliveryCompanyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 318, Short.MAX_VALUE)
-        );
-        ChooseDeliveryCompanyPanelLayout.setVerticalGroup(
-            ChooseDeliveryCompanyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 294, Short.MAX_VALUE)
-        );
+        ChooseDeliveryCompanyPanel.setLayout(new java.awt.CardLayout());
 
         jLabel1.setFont(new java.awt.Font("宋体", 1, 18)); // NOI18N
         jLabel1.setText("Pending Orders:");
+
+        jLabel2.setFont(new java.awt.Font("宋体", 1, 18)); // NOI18N
+        jLabel2.setText("Total price：");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -190,47 +191,50 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel6)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
+                                .addComponent(jScrollPane3))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
-                                .addGap(30, 30, 30))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(TotalPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ChooseDeliveryCompanyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(ConfirmOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cancelOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(14, 14, 14)))))
-                .addContainerGap())
+                                .addGap(18, 18, 18)
+                                .addComponent(cancelOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(24, 24, 24))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ConfirmOrderButton)
+                        .addComponent(cancelOrderButton))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ConfirmOrderButton)
-                            .addComponent(cancelOrderButton))
-                        .addGap(29, 29, 29)
-                        .addComponent(ChooseDeliveryCompanyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(65, 65, 65))
+                            .addComponent(jLabel2)
+                            .addComponent(TotalPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(ChooseDeliveryCompanyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Process Order", jPanel2);
@@ -446,21 +450,35 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
 
     private void ConfirmOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmOrderButtonActionPerformed
         int index = orderTable.getSelectedRow();
+        
         if (orderTable.getSelectedRow() >= 0) {
-            Order order = (Order) orderTable.getValueAt(index, 0);
-            ChooseDeliveryJPanel p = new ChooseDeliveryJPanel(system, this, ChooseDeliveryCompanyPanel, this.store, order);
-            this.ChooseDeliveryCompanyPanel.add(p);
-            CardLayout layout = (CardLayout)ChooseDeliveryCompanyPanel.getLayout();
+            Order order = (Order) orderTable.getValueAt(index, 2);
+                if(order.getStatus()!= Status.Waiting){
+                JOptionPane.showMessageDialog(this, "This Order had been solved.");
+                return;
+                }
+                
+            order.setStatus(Status.Accepted);
+            DB4OUtil.getInstance().storeSystem(system);
+
+            ChooseDeliveryJPanel cdp = new ChooseDeliveryJPanel(system, this, ChooseDeliveryCompanyPanel, this.store, order);
+            this.ChooseDeliveryCompanyPanel.add(cdp);
+            CardLayout layout = (CardLayout) ChooseDeliveryCompanyPanel.getLayout();
             layout.next(ChooseDeliveryCompanyPanel);
         }else{
             JOptionPane.showMessageDialog(null, "Please select an order");
         }
+        
     }//GEN-LAST:event_ConfirmOrderButtonActionPerformed
 
     private void cancelOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelOrderButtonActionPerformed
         int index = orderTable.getSelectedRow();
         if (orderTable.getSelectedRow() >= 0) {
-            Order order = (Order) orderTable.getValueAt(index, 0);
+            Order order = (Order) orderTable.getValueAt(index, 2);
+            if(order.getStatus()!= Status.Waiting){
+                JOptionPane.showMessageDialog(this, "This Order had been solved.");
+                return;
+            }
             order.setStatus(Status.Refused);
             DB4OUtil.getInstance().storeSystem(system);
             populateorderTable();
@@ -474,9 +492,11 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
         int index = orderTable.getSelectedRow();
 
         if (index >= 0) {
-            Order order = (Order) orderTable.getValueAt(index, 0);
+            Order order = (Order)orderTable.getValueAt(index, 2);
             populateDetailTable(order);
+            TotalPriceTextField.setText(String.valueOf(order.calculatePrice()));
         }
+        
     }//GEN-LAST:event_orderTableMouseClicked
 
     private void cancelButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButton2ActionPerformed
@@ -555,6 +575,7 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ChooseDeliveryCompanyPanel;
     private javax.swing.JButton ConfirmOrderButton;
+    private javax.swing.JTextField TotalPriceTextField;
     private javax.swing.JTextField addressTextField;
     private javax.swing.JButton cancelButton1;
     private javax.swing.JButton cancelButton2;
@@ -570,6 +591,7 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -593,12 +615,14 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
         DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
         dtm.setRowCount(0);
         for (WorkRequest wr : store.getWorkQueue().getWorkRequestList()) {
-            Order order = (Order) wr;
-            Object row[] = new Object[3];
-            row[0] = order.getRequestDate();
-            row[1] = order.getSender();
-            row[2] = order.getStatus();
-            dtm.addRow(row);
+            if(wr instanceof Order){
+                Order order = (Order) wr;
+                Object row[] = new Object[3];
+                row[0] = order.getRequestDate();
+                row[1] = order.getSender();
+                row[2] = order;
+                dtm.addRow(row);
+            }
         }
     }
 
