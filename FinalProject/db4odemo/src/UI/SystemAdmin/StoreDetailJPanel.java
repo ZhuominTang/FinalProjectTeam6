@@ -34,7 +34,7 @@ public class StoreDetailJPanel extends javax.swing.JPanel {
 
         this.setSize(900, 640);
         populateText();
-        populateOrderJTable1(); 
+        populateOrderJTable1();
     }
 
     /**
@@ -340,14 +340,15 @@ public class StoreDetailJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(totalPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel11)
                         .addComponent(totalDeliveyAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel19)
-                        .addComponent(totalDeliveryMan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(totalDeliveryMan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(totalPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -379,8 +380,8 @@ public class StoreDetailJPanel extends javax.swing.JPanel {
     public void populateText() {
 
         storeNameTextField.setText(enterprise.getName());
-        //  addressTextField.setText(c.getAddress());
-        //  phoneTextField.setText(c.getPhone());
+        addressTextField.setText(enterprise.getAddress());
+        phoneTextField.setText(enterprise.getPhoneNumber());
 
         quantityTextField.setText(String.valueOf(enterprise.getWorkQueue().getWorkRequestList().size()));
         totalTextField.setText(String.valueOf(enterprise.getWorkQueue().calculateTotalPurchased()));

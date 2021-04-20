@@ -14,7 +14,9 @@ import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.CustomerContactRequest;
+import Business.WorkQueue.Status;
 import Business.WorkQueue.WorkRequest;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -399,6 +401,8 @@ public class StoreReceptionistJPanel extends javax.swing.JPanel {
         }
         CustomerContactRequest ccr = (CustomerContactRequest) MessagejTable.getValueAt(selectedRowIndex, 2);
         ccr.setReceiverMessage(messageTextArea.getText());
+        ccr.setResolveDate(new Date());
+        ccr.setStatus(Status.Accepted);
         populateMessageTable();
     }//GEN-LAST:event_ReplyjButtonActionPerformed
 
@@ -537,7 +541,7 @@ public class StoreReceptionistJPanel extends javax.swing.JPanel {
             if(wr instanceof CustomerContactRequest){
                 CustomerContactRequest ccr = (CustomerContactRequest) wr;
                 Object[] row = new Object[5];
-                row[0] = ccr.getRequestDate();
+                row[0] = ccr.dataFormat(ccr.getRequestDate());
                 row[1] = ccr.getSender();
                 row[2] = ccr;
                 row[3] = ccr.getSenderMessage();
