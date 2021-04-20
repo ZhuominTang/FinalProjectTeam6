@@ -13,7 +13,7 @@ import Business.Enterprise.CustomerCenter;
 import Business.Enterprise.Enterprise;
 import Business.Organization.CustomerOrganization;
 import Business.Organization.Organization;
-import static Business.Organization.Organization.Type.Customer;
+
 import Business.Role.CustomerRole;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;

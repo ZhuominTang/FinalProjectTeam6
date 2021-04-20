@@ -81,7 +81,6 @@ public class CustomerJPanel extends javax.swing.JPanel {
         storeTable = new javax.swing.JTable();
         StoreDetailPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        viewDetailJButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -93,6 +92,10 @@ public class CustomerJPanel extends javax.swing.JPanel {
         commentJTextField = new javax.swing.JTextField();
         commentJButton = new javax.swing.JButton();
         confirmReceiveJButton = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        totalDeliveyAgent = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        totalDeliveryMan = new javax.swing.JTextField();
         profilePanel = new javax.swing.JPanel();
         cancelButton2 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
@@ -260,14 +263,6 @@ public class CustomerJPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Shopping", jPanel4);
 
-        viewDetailJButton.setFont(new java.awt.Font("宋体", 0, 12)); // NOI18N
-        viewDetailJButton.setText("View Order Detail");
-        viewDetailJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewDetailJButtonActionPerformed(evt);
-            }
-        });
-
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel7.setText("Order Detail:");
 
@@ -390,6 +385,11 @@ public class CustomerJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        orderJTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                orderJTable1MouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(orderJTable1);
 
         commentJTextField.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
@@ -410,6 +410,26 @@ public class CustomerJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel11.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel11.setText("DeliveryAgent:");
+
+        totalDeliveyAgent.setEditable(false);
+        totalDeliveyAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalDeliveyAgentActionPerformed(evt);
+            }
+        });
+
+        jLabel19.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel19.setText("DeliveyMan:");
+
+        totalDeliveryMan.setEditable(false);
+        totalDeliveryMan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalDeliveryManActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -421,16 +441,20 @@ public class CustomerJPanel extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel9)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(totalPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel8)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(viewDetailJButton))))
+                            .addComponent(totalPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel11)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(totalDeliveyAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel19)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(totalDeliveryMan, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel7))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(confirmReceiveJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -451,17 +475,22 @@ public class CustomerJPanel extends javax.swing.JPanel {
                     .addComponent(commentJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(commentJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(confirmReceiveJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(viewDetailJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                .addGap(39, 39, 39)
+                .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(totalPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel19)
+                        .addComponent(totalDeliveryMan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(totalDeliveyAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(totalPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Order History", jPanel2);
@@ -703,6 +732,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
         organization.getWorkQueue().getWorkRequestList().add(cmr);
         JOptionPane.showMessageDialog(this, "The message has been sent!", "Information", JOptionPane.DEFAULT_OPTION);
         populateCustomerMessageJTable();
+        DB4OUtil.getInstance().storeSystem(system);
     }//GEN-LAST:event_submitJButtonActionPerformed
     public void populateOrderJTable1() {
         DefaultTableModel model = (DefaultTableModel) orderJTable1.getModel();
@@ -740,18 +770,9 @@ public class CustomerJPanel extends javax.swing.JPanel {
             model.addRow(row);
         }
         totalPriceTextField.setText(String.valueOf(order.calculatePrice()));
+        totalDeliveyAgent.setText(order.getDeliveryAgentName());
+        totalDeliveryMan.setText(order.getDeliverymanName());
     }
-    private void viewDetailJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDetailJButtonActionPerformed
-        int selectedRowIndex = orderJTable1.getSelectedRow();
-
-        if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        WorkRequest wr = (WorkRequest) orderJTable1.getValueAt(selectedRowIndex, 1);
-        populateOrderDetailJTable(wr);
-    }//GEN-LAST:event_viewDetailJButtonActionPerformed
-
     private void totalPriceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalPriceTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_totalPriceTextFieldActionPerformed
@@ -774,6 +795,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
         }
         wr.setSenderMessage(commentJTextField.getText());
         populateOrderJTable1();
+         DB4OUtil.getInstance().storeSystem(system);
 
     }//GEN-LAST:event_commentJButtonActionPerformed
 
@@ -794,6 +816,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
             wr.setResolveDate(new Date());
         }
         populateOrderJTable1();
+         DB4OUtil.getInstance().storeSystem(system);
     }//GEN-LAST:event_confirmReceiveJButtonActionPerformed
 
     private void cancelButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButton1ActionPerformed
@@ -828,6 +851,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Password is not correct!");
         }
+         DB4OUtil.getInstance().storeSystem(system);
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void cancelButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButton2ActionPerformed
@@ -902,6 +926,21 @@ public class CustomerJPanel extends javax.swing.JPanel {
         layout.next(StoreDetailPanel);
 
     }//GEN-LAST:event_storeTableMouseClicked
+
+    private void totalDeliveyAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalDeliveyAgentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalDeliveyAgentActionPerformed
+
+    private void totalDeliveryManActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalDeliveryManActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalDeliveryManActionPerformed
+
+    private void orderJTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderJTable1MouseClicked
+        int selectedRowIndex = orderJTable1.getSelectedRow();
+
+        WorkRequest wr = (WorkRequest) orderJTable1.getValueAt(selectedRowIndex, 1);
+        populateOrderDetailJTable(wr);
+    }//GEN-LAST:event_orderJTable1MouseClicked
     public void populateCustomerMessageJTable() {
         DefaultTableModel model = (DefaultTableModel) customerMessageJTable.getModel();
         model.setRowCount(0);
@@ -919,17 +958,16 @@ public class CustomerJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel StoreDetailPanel;
     private javax.swing.JTextField addressTextField;
-    private javax.swing.JButton btnDeliveryAccept;
     private javax.swing.JButton cancelButton1;
     private javax.swing.JButton cancelButton2;
     private javax.swing.JButton commentJButton;
     private javax.swing.JTextField commentJTextField;
     private javax.swing.JButton confirmReceiveJButton;
     private javax.swing.JTable customerMessageJTable;
-    private javax.swing.JTable deliveryAgentRegistrationJTable1;
     private javax.swing.JButton editButton1;
     private javax.swing.JTextField firstNameTextField;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -937,20 +975,18 @@ public class CustomerJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField lastNameTextField;
     private javax.swing.JTextField messageJTextField;
     private javax.swing.JTable orderDetailJTable;
@@ -965,8 +1001,9 @@ public class CustomerJPanel extends javax.swing.JPanel {
     private javax.swing.JTable storeTable;
     private javax.swing.JButton submitButton;
     private javax.swing.JButton submitJButton;
+    private javax.swing.JTextField totalDeliveryMan;
+    private javax.swing.JTextField totalDeliveyAgent;
     private javax.swing.JTextField totalPriceTextField;
     private javax.swing.JTextField usernameTextField;
-    private javax.swing.JButton viewDetailJButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -490,6 +490,7 @@ public class SysServicePersonnelJPanel extends javax.swing.JPanel {
         s.setPhoneNumber(srr.getPhoneNumber());
         org.getUserAccountDirectory().createUserAccount(srr.getUserName(), srr.getPassword(), new Person(), new StoreAdminRole());
         populateStoreRegistrationJTable();
+         DB4OUtil.getInstance().storeSystem(system);
 
     }//GEN-LAST:event_btnStoreAcceptActionPerformed
 
@@ -516,6 +517,7 @@ public class SysServicePersonnelJPanel extends javax.swing.JPanel {
         da.setPhoneNumber(darr.getPhoneNumber());
         org.getUserAccountDirectory().createUserAccount(darr.getUserName(), darr.getPassword(), new Person(), new DeliveryAgentAdminRoll());
         populateDeliveryAgentRegistrationJTable1();
+         DB4OUtil.getInstance().storeSystem(system);
     }//GEN-LAST:event_btnDeliveryAcceptActionPerformed
 
     private void refuseStoreJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refuseStoreJButtonActionPerformed
@@ -527,11 +529,12 @@ public class SysServicePersonnelJPanel extends javax.swing.JPanel {
         }
         WorkRequest wr = (WorkRequest) storeRegistrationJTable.getValueAt(selectedRowIndex, 2);
         if (wr.getStatus() == Status.Accepted) {
-            JOptionPane.showMessageDialog(this, "This request has been recepted!", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "This request has been Accepted!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         system.getWorkQueue().getWorkRequestList().remove(wr);
         populateStoreRegistrationJTable();
+         DB4OUtil.getInstance().storeSystem(system);
 
     }//GEN-LAST:event_refuseStoreJButtonActionPerformed
 
@@ -544,11 +547,12 @@ public class SysServicePersonnelJPanel extends javax.swing.JPanel {
         }
         WorkRequest wr = (WorkRequest) deliveryAgentRegistrationJTable1.getValueAt(selectedRowIndex, 2);
         if (wr.getStatus() == Status.Accepted) {
-            JOptionPane.showMessageDialog(this, "This request has been recepted!", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "This request has been Accepted!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         system.getWorkQueue().getWorkRequestList().remove(wr);
         populateDeliveryAgentRegistrationJTable1();
+         DB4OUtil.getInstance().storeSystem(system);
     }//GEN-LAST:event_refuseDeliveryAgentJButton1ActionPerformed
 
     private void cancelButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButton2ActionPerformed
@@ -622,6 +626,7 @@ public class SysServicePersonnelJPanel extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Password is not correct!");
         }
+         DB4OUtil.getInstance().storeSystem(system);
     }//GEN-LAST:event_submitButtonActionPerformed
     private void populateDeliveryAgentRegistrationJTable1() {
         DefaultTableModel model = (DefaultTableModel) deliveryAgentRegistrationJTable1.getModel();

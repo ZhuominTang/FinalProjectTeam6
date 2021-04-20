@@ -410,7 +410,7 @@ public class ShopDetailsJPanel extends javax.swing.JPanel {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add(new OrderJPanel(userProcessContainer,account,enterprise));
+        userProcessContainer.add(new OrderJPanel(userProcessContainer,system,account,enterprise));
         layout.next(userProcessContainer);
     }//GEN-LAST:event_addButtonActionPerformed
 
@@ -431,6 +431,7 @@ public class ShopDetailsJPanel extends javax.swing.JPanel {
         account.getWorkQueue().getWorkRequestList().add(ccr);
         JOptionPane.showMessageDialog(this, "The message has been sent!", "Information", JOptionPane.DEFAULT_OPTION);
         populatecustomerContactJTable();
+         DB4OUtil.getInstance().storeSystem(system);
     }//GEN-LAST:event_submitJButtonActionPerformed
 
 

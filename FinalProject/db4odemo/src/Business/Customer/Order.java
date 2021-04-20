@@ -20,7 +20,26 @@ import java.util.Map;
 public class Order extends WorkRequest {
 
     private HashMap<Item, Integer> orderItem;
+    
     private Enterprise enterprise;
+    private String deliverymanName;
+    private String DeliveryAgentName;
+
+    public String getDeliverymanName() {
+        return deliverymanName;
+    }
+
+    public void setDeliverymanName(String deliverymanName) {
+        this.deliverymanName = deliverymanName;
+    }
+
+    public String getDeliveryAgentName() {
+        return DeliveryAgentName;
+    }
+
+    public void setDeliveryAgentName(String DeliveryAgentName) {
+        this.DeliveryAgentName = DeliveryAgentName;
+    }
    
 
     public Order() {

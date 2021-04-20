@@ -8,6 +8,7 @@ package UI.Customer;
 import Business.Business.EcoSystem;
 import Business.Customer.Customer;
 import Business.Customer.Order;
+import Business.DB4OUtil.DB4OUtil;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.Item;
 import Business.Enterprise.Store;
@@ -35,11 +36,13 @@ public class OrderJPanel extends javax.swing.JPanel {
     private Customer customer;
     private Order order;
     private Store store;
+    private EcoSystem system;
 
-    public OrderJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise) {
+    public OrderJPanel(JPanel userProcessContainer, EcoSystem system, UserAccount account, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
+        this.system=system;
         this.enterprise = enterprise;
         this.store = (Store) enterprise;
         this.order = new Order();
@@ -304,6 +307,7 @@ public class OrderJPanel extends javax.swing.JPanel {
         account.getWorkQueue().getWorkRequestList().add(order);
         enterprise.getWorkQueue().getWorkRequestList().add(order);
         JOptionPane.showMessageDialog(this, "The order has been sent, please wait for the store's response!", "Information", JOptionPane.DEFAULT_OPTION);
+         DB4OUtil.getInstance().storeSystem(system);
     }//GEN-LAST:event_checkoutButtonActionPerformed
     private void populateItemListTable() {
         DefaultTableModel model = (DefaultTableModel) itemListTable.getModel();

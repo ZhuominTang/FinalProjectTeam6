@@ -64,12 +64,15 @@ public class CustomerDetailJPanel extends javax.swing.JPanel {
         phoneTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         quantityTextField = new javax.swing.JTextField();
-        viewDetailJButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         backJButton1 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         totalPriceTextField = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        totalDeliveyAgent = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        totalDeliveryMan = new javax.swing.JTextField();
 
         orderDetailJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -177,6 +180,11 @@ public class CustomerDetailJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        orderJTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                orderJTable1MouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(orderJTable1);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
@@ -209,14 +217,6 @@ public class CustomerDetailJPanel extends javax.swing.JPanel {
 
         quantityTextField.setEditable(false);
 
-        viewDetailJButton.setFont(new java.awt.Font("宋体", 0, 12)); // NOI18N
-        viewDetailJButton.setText("View Order Detail");
-        viewDetailJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewDetailJButtonActionPerformed(evt);
-            }
-        });
-
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel7.setText("Order Detail:");
 
@@ -241,6 +241,26 @@ public class CustomerDetailJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel11.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel11.setText("DeliveryAgent:");
+
+        totalDeliveyAgent.setEditable(false);
+        totalDeliveyAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalDeliveyAgentActionPerformed(evt);
+            }
+        });
+
+        jLabel19.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel19.setText("DeliveyMan:");
+
+        totalDeliveryMan.setEditable(false);
+        totalDeliveryMan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                totalDeliveryManActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -250,10 +270,6 @@ public class CustomerDetailJPanel extends javax.swing.JPanel {
                 .addComponent(backJButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(totalPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel8)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -286,10 +302,19 @@ public class CustomerDetailJPanel extends javax.swing.JPanel {
                                             .addComponent(quantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addComponent(jLabel6)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel7)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(viewDetailJButton))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel9)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(totalPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel11)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(totalDeliveyAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel19)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(totalDeliveryMan))
+                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -329,30 +354,22 @@ public class CustomerDetailJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(viewDetailJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(totalPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(totalDeliveyAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel19)
+                        .addComponent(totalDeliveryMan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(totalPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void viewDetailJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDetailJButtonActionPerformed
-        int selectedRowIndex = orderJTable1.getSelectedRow();
-
-        if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        WorkRequest wr = (WorkRequest) orderJTable1.getValueAt(selectedRowIndex, 1);
-        populateOrderDetailJTable(wr);
-
-    }//GEN-LAST:event_viewDetailJButtonActionPerformed
 
     private void backJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButton1ActionPerformed
         userProcessContainer.remove(this);
@@ -363,6 +380,22 @@ public class CustomerDetailJPanel extends javax.swing.JPanel {
     private void totalPriceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalPriceTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_totalPriceTextFieldActionPerformed
+
+    private void totalDeliveyAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalDeliveyAgentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalDeliveyAgentActionPerformed
+
+    private void totalDeliveryManActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalDeliveryManActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalDeliveryManActionPerformed
+
+    private void orderJTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderJTable1MouseClicked
+        int selectedRowIndex = orderJTable1.getSelectedRow();
+
+      
+        WorkRequest wr = (WorkRequest) orderJTable1.getValueAt(selectedRowIndex, 1);
+        populateOrderDetailJTable(wr);
+    }//GEN-LAST:event_orderJTable1MouseClicked
     public void populateText() {
         Customer c = (Customer) account.getPerson();
         customerNameTextField.setText(account.getPerson().returnFullName());
@@ -409,12 +442,16 @@ public class CustomerDetailJPanel extends javax.swing.JPanel {
             model.addRow(row);
         }
         totalPriceTextField.setText(String.valueOf(order.calculatePrice()));
+        totalDeliveyAgent.setText(order.getDeliveryAgentName());
+        totalDeliveryMan.setText(order.getDeliverymanName());
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addressTextField;
     private javax.swing.JButton backJButton1;
     private javax.swing.JTextField customerNameTextField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -429,9 +466,10 @@ public class CustomerDetailJPanel extends javax.swing.JPanel {
     private javax.swing.JTable orderJTable1;
     private javax.swing.JTextField phoneTextField;
     private javax.swing.JTextField quantityTextField;
+    private javax.swing.JTextField totalDeliveryMan;
+    private javax.swing.JTextField totalDeliveyAgent;
     private javax.swing.JTextField totalPriceTextField;
     private javax.swing.JTextField totalTextField;
     private javax.swing.JTextField usernameTextField;
-    private javax.swing.JButton viewDetailJButton;
     // End of variables declaration//GEN-END:variables
 }
