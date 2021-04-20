@@ -5,9 +5,7 @@ public enum Status {
     Accepted("Accepted"),
     Sending("Sending"),
     Refused("Refused"),
-    Received("Received"),
-    Delivery ("WaitingForDelivery");
-    
+    Received("Received");
 
     private String value;
 

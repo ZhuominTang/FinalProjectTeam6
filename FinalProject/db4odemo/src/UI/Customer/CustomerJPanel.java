@@ -919,14 +919,12 @@ public class CustomerJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel StoreDetailPanel;
     private javax.swing.JTextField addressTextField;
-    private javax.swing.JButton btnDeliveryAccept;
     private javax.swing.JButton cancelButton1;
     private javax.swing.JButton cancelButton2;
     private javax.swing.JButton commentJButton;
     private javax.swing.JTextField commentJTextField;
     private javax.swing.JButton confirmReceiveJButton;
     private javax.swing.JTable customerMessageJTable;
-    private javax.swing.JTable deliveryAgentRegistrationJTable1;
     private javax.swing.JButton editButton1;
     private javax.swing.JTextField firstNameTextField;
     private javax.swing.JLabel jLabel10;
@@ -942,15 +940,12 @@ public class CustomerJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField lastNameTextField;
     private javax.swing.JTextField messageJTextField;
     private javax.swing.JTable orderDetailJTable;

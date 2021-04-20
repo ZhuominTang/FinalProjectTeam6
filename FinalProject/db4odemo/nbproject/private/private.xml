@@ -3,25 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/UI/Customer/OrderJPanel.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/Business/Enterprise/Item.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/UI/SystemAdmin/CustomerDetailJPanel.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/Business/Organization/OrganizationDirectory.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/Business/Organization/DeliveryAgentAdminOrganization.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/UI/SystemAdmin/SysAdminJPanel.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/Business/Organization/CustomerOrganization.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/Business/Enterprise/Enterprise.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/UI/Customer/CustomerJPanel.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/Business/WorkQueue/CustomerMessageRequest.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/UI/RegisterJPanel.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/UI/Customer/ShopDetailsJPanel.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/Business/Enterprise/EnterpriseDirectory.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/UI/MainJFrame.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/Business/WorkQueue/CustomerContactRequest.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/Business/Enterprise/Store.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/UI/SysServicePersonnel/SysServicePersonnelJPanel.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/Business/Organization/Organization.java</file>
-            <file>file:/C:/Users/tzm/Documents/NetBeansProjects/FinalProject/db4odemo/src/Business/Customer/Order.java</file>
+            <file>file:/C:/Users/10643/Desktop/FinalProjectTeam6-main/FinalProjectTeam6-main/FinalProject/db4odemo/src/UI/Store/StoreManagerMainJPanel.java</file>
+            <file>file:/C:/Users/10643/Desktop/FinalProjectTeam6-main/FinalProjectTeam6-main/FinalProject/db4odemo/src/Business/UserAccount/UserAccount.java</file>
+            <file>file:/C:/Users/10643/Desktop/FinalProjectTeam6-main/FinalProjectTeam6-main/FinalProject/db4odemo/src/UI/Store/ChooseDeliveryJPanel.java</file>
+            <file>file:/C:/Users/10643/Desktop/FinalProjectTeam6-main/FinalProjectTeam6-main/FinalProject/db4odemo/src/Business/Role/Role.java</file>
         </group>
     </open-files>
 </project-private>
