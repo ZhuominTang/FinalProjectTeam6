@@ -6,9 +6,11 @@
 package UI.SystemAdmin;
 
 import Business.Business.EcoSystem;
+import Business.DB4OUtil.DB4OUtil;
 import Business.Employee.Employee;
 import Business.Enterprise.CustomerCenter;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.Store;
 import Business.Organization.Organization;
 import Business.Role.SysServicePersonnelRole;
 import Business.UserAccount.UserAccount;
@@ -44,7 +46,8 @@ public class SysAdminJPanel extends javax.swing.JPanel {
         this.setSize(900, 640);
         populateServicePersonnelJTable();
         populateCustomerJTable();
-        populateCustomerSortJComboBox();
+       populateSortJComboBox();
+        populateStoreJTable();
     }
 
     /**
@@ -82,6 +85,16 @@ public class SysAdminJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         sortButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        searchTextFieldStore = new javax.swing.JTextField();
+        searchButton1 = new javax.swing.JButton();
+        refreshButton1 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        storeJTable = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        StoreSortJComboBox = new javax.swing.JComboBox();
+        sortButton1 = new javax.swing.JButton();
+        customerDetailButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
 
         servicePersonnelJTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -355,15 +368,146 @@ public class SysAdminJPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Manage Customers", jPanel1);
 
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel3.setText("Search:");
+
+        searchButton1.setText("Search");
+        searchButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButton1ActionPerformed(evt);
+            }
+        });
+
+        refreshButton1.setText("Refresh");
+        refreshButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButton1ActionPerformed(evt);
+            }
+        });
+
+        storeJTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "StoreName", "Quantity Of Completed Order", "Total Revenue"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(storeJTable);
+
+        jLabel4.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabel4.setText("Sorted By:");
+
+        StoreSortJComboBox.setFont(new java.awt.Font("宋体", 1, 14)); // NOI18N
+        StoreSortJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        StoreSortJComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StoreSortJComboBoxActionPerformed(evt);
+            }
+        });
+
+        sortButton1.setText("Sort");
+        sortButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortButton1ActionPerformed(evt);
+            }
+        });
+
+        customerDetailButton1.setText("View The Store Detail");
+        customerDetailButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customerDetailButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 931, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(StoreSortJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(sortButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(customerDetailButton1))
+                    .addComponent(jLabel4)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(searchTextFieldStore, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(refreshButton1))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 664, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(searchTextFieldStore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchButton1)
+                    .addComponent(refreshButton1))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(StoreSortJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customerDetailButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sortButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(263, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Manage Stores", jPanel3);
@@ -456,6 +600,7 @@ public class SysAdminJPanel extends javax.swing.JPanel {
         userNameTextField.setText("");
         passwordJPasswordField.setText("");
         populateServicePersonnelJTable();
+         DB4OUtil.getInstance().storeSystem(system);
     }//GEN-LAST:event_btnSubmit1ActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -468,6 +613,7 @@ public class SysAdminJPanel extends javax.swing.JPanel {
         system.getEmployeeDirectory().getEmployeeList().remove(ua.getPerson());
         system.getUserAccountDirectory().getUserAccountList().remove(ua);
         populateServicePersonnelJTable();
+         DB4OUtil.getInstance().storeSystem(system);
 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -490,6 +636,7 @@ public class SysAdminJPanel extends javax.swing.JPanel {
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
         populateCustomerJTable();
+        searchTextField.setText("");
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void customerSortJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerSortJComboBoxActionPerformed
@@ -541,6 +688,79 @@ public class SysAdminJPanel extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_sortButtonActionPerformed
+
+    private void searchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton1ActionPerformed
+        String s = searchTextFieldStore.getText();
+        ArrayList<Enterprise> result = new ArrayList<Enterprise>();
+        if (!s.trim().equals("")) {
+            for (Enterprise en : system.getEnterpriseDirectory().getEnterpriseList()) {
+                if (en instanceof Store && en.getName().toLowerCase().contains(s.toLowerCase())) {
+
+                    if (!result.contains(en)) {
+                        result.add(en);
+                    }
+
+                }
+            }
+
+            populateStoreJTableByResult(result);
+        }
+        searchTextField.setText("");
+    }//GEN-LAST:event_searchButton1ActionPerformed
+
+    private void refreshButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButton1ActionPerformed
+        populateStoreJTable();
+        searchTextFieldStore.setText("");
+    }//GEN-LAST:event_refreshButton1ActionPerformed
+
+    private void StoreSortJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StoreSortJComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StoreSortJComboBoxActionPerformed
+
+    private void sortButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortButton1ActionPerformed
+        String s = (String) StoreSortJComboBox.getSelectedItem();
+        Comparator<Enterprise> cpt = null;
+        ArrayList<Enterprise> list = new ArrayList<>();
+       
+        if (s.equals("Total Revenue")) {
+            cpt = (Enterprise e1, Enterprise e2)
+                    -> Double.compare(e1.getWorkQueue().calculateTotalPurchased(), e2.getWorkQueue().calculateTotalPurchased());
+        }
+
+        if (s.equals("Storename")) {
+            cpt = (Enterprise e1, Enterprise e2)
+                    -> e1.getName().compareTo(e2.getName());
+        }
+
+        if (s.equals("Quantity")) {
+            cpt = (Enterprise e1, Enterprise e2)
+                    -> Integer.compare(e1.getWorkQueue().countCompletedOrder(), e2.getWorkQueue().countCompletedOrder());
+        }
+        for (Enterprise en : system.getEnterpriseDirectory().getEnterpriseList()) {
+            if (en instanceof Store) {
+                
+                    list.add(en);
+               
+            }
+        }
+        Collections.sort(list, cpt);
+
+        populateStoreJTableByResult(list);
+    }//GEN-LAST:event_sortButton1ActionPerformed
+
+    private void customerDetailButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerDetailButton1ActionPerformed
+           int selectedRowIndex = storeJTable.getSelectedRow();
+
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Enterprise en = (Enterprise) storeJTable.getValueAt(selectedRowIndex, 0);
+        StoreDetailJPanel cdjp = new StoreDetailJPanel(userProcessContainer, en );
+        userProcessContainer.add("StoreDetailJPanel", cdjp);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_customerDetailButton1ActionPerformed
     private void populateServicePersonnelJTable() {
         DefaultTableModel model = (DefaultTableModel) servicePersonnelJTable.getModel();
 
@@ -555,6 +775,38 @@ public class SysAdminJPanel extends javax.swing.JPanel {
             }
         }
 
+    }
+
+    private void populateStoreJTable() {
+        DefaultTableModel model = (DefaultTableModel)  storeJTable.getModel();
+
+        model.setRowCount(0);
+        for (Enterprise en : system.getEnterpriseDirectory().getEnterpriseList()) {
+            if (en instanceof Store) {
+
+                Object[] row = new Object[3];
+                row[0] = en;
+                row[1] = en.getWorkQueue().countCompletedOrder();
+                row[2] = en.getWorkQueue().calculateTotalPurchased();
+                model.addRow(row);
+
+            }
+        }
+
+    }
+
+    public void populateStoreJTableByResult(ArrayList<Enterprise> list) {
+        DefaultTableModel model = (DefaultTableModel) storeJTable.getModel();
+        model.setRowCount(0);
+        for (Enterprise en : list) {
+
+            Object row[] = new Object[3];
+            row[0] = en;
+            row[1] = en.getWorkQueue().countCompletedOrder();
+            row[2] = en.getWorkQueue().calculateTotalPurchased();
+
+            model.addRow(row);
+        }
     }
 
     private void populateCustomerJTable() {
@@ -577,12 +829,16 @@ public class SysAdminJPanel extends javax.swing.JPanel {
 
     }
 
-    private void populateCustomerSortJComboBox() {
+    private void populateSortJComboBox() {
         customerSortJComboBox.removeAllItems();
 
         customerSortJComboBox.addItem("Username");
         customerSortJComboBox.addItem("Quantity");
         customerSortJComboBox.addItem("Total Purchased");
+        StoreSortJComboBox.removeAllItems();
+        StoreSortJComboBox.addItem("Storename");
+        StoreSortJComboBox.addItem("Quantity");
+        StoreSortJComboBox.addItem("Total Revenue");
     }
 
     public void populateCustomerJTableByResult(ArrayList<UserAccount> list) {
@@ -611,13 +867,17 @@ public class SysAdminJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox StoreSortJComboBox;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSubmit1;
     private javax.swing.JButton customerDetailButton;
+    private javax.swing.JButton customerDetailButton1;
     private javax.swing.JTable customerJTable;
     private javax.swing.JComboBox customerSortJComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -626,15 +886,21 @@ public class SysAdminJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblName1;
     private javax.swing.JPasswordField passwordJPasswordField;
     private javax.swing.JButton refreshButton;
+    private javax.swing.JButton refreshButton1;
     private javax.swing.JButton searchButton;
+    private javax.swing.JButton searchButton1;
     private javax.swing.JTextField searchTextField;
+    private javax.swing.JTextField searchTextFieldStore;
     private javax.swing.JTable servicePersonnelJTable;
     private javax.swing.JButton sortButton;
+    private javax.swing.JButton sortButton1;
+    private javax.swing.JTable storeJTable;
     private javax.swing.JTextField txtEmployeeFirstName;
     private javax.swing.JTextField txtEmployeeLastName;
     private javax.swing.JTextField userNameTextField;

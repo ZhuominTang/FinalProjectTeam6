@@ -29,8 +29,4 @@ public class ItemDirectory {
         itemDirectory.add(item);
         return item;
     } 
-    
-    public void removeItem(Item item) {
-        itemDirectory.remove(item);
-    }
 }

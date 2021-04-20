@@ -75,7 +75,7 @@ public class RgtSJPanel extends javax.swing.JPanel {
         });
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jLabel2.setText("StroePhoneNumber:");
+        jLabel2.setText("StorePhoneNumber:");
 
         storePhoneTextField.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
 

@@ -26,7 +26,7 @@ public class WorkQueue {
     public int countCompletedOrder() {
         int count = 0;
         for (int i = 0; i < workRequestList.size(); i++) {
-            if (workRequestList.get(i).getStatus() == Status.Received) {
+            if (workRequestList.get(i) instanceof Order && workRequestList.get(i).getStatus() == Status.Received) {
                 count++;
 
             }
@@ -39,7 +39,7 @@ public class WorkQueue {
     public double calculateTotalPurchased() {
         double money = 0;
         for (int i = 0; i < workRequestList.size(); i++) {
-            if (workRequestList.get(i).getStatus() == Status.Received) {
+            if (workRequestList.get(i) instanceof Order && workRequestList.get(i).getStatus() == Status.Received) {
                 Order o = (Order) workRequestList.get(i);
                 money += o.calculatePrice();
             }
