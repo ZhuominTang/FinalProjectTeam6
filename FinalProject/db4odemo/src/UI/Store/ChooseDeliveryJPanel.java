@@ -6,11 +6,16 @@
 package UI.Store;
 
 import Business.Business.EcoSystem;
+import Business.Customer.Customer;
 import Business.Customer.Order;
+import Business.DB4OUtil.DB4OUtil;
 import Business.Enterprise.DeliveryAgent;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.Store;
+import Business.WorkQueue.ShippingOrder;
+import Business.WorkQueue.Status;
 import java.awt.CardLayout;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -29,6 +34,7 @@ public class ChooseDeliveryJPanel extends javax.swing.JPanel {
     private JPanel ChooseDeliveryCompanyPanel;
     private Store store;
     private Order order;
+
     public ChooseDeliveryJPanel(EcoSystem system, JPanel panel, JPanel ChooseDeliveryCompanyPanel, Store store, Order order) {
         initComponents();
         this.system = system;
@@ -137,7 +143,19 @@ public class ChooseDeliveryJPanel extends javax.swing.JPanel {
         if (DeliveryCompanyjTable1.getSelectedRow() >= 0) {
             DeliveryAgent da = (DeliveryAgent) DeliveryCompanyjTable1.getValueAt(DeliveryCompanyjTable1.getSelectedRow(), 0);
             
-            
+            ShippingOrder so = new ShippingOrder();
+            so.setOrder(order);
+            so.setStoreEnterprise(store);
+            so.setDaEnterprise(da);
+            so.setStatus(Status.Waiting);
+            so.setRequestDate(new Date());
+            so.setCustomerAddress(((Customer) order.getSender().getPerson()).getAddress());
+            so.setCustomerPhone(((Customer) order.getSender().getPerson()).getPhone());
+            so.setStoreAddress(store.getAddress());
+            so.setStorePhone(store.getPhoneNumber());
+            order.setShippingOrder(so);
+            da.getWorkQueue().getWorkRequestList().add(so);
+            DB4OUtil.getInstance().storeSystem(system);
             
             ChooseDeliveryCompanyPanel.remove(this);
         } else {
@@ -158,8 +176,8 @@ public class ChooseDeliveryJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) DeliveryCompanyjTable1.getModel();
         model.setRowCount(0);
         for (Enterprise e : system.getEnterpriseDirectory().getEnterpriseList()) {
-            if(e instanceof DeliveryAgent){
-                DeliveryAgent da = (DeliveryAgent)e;
+            if (e instanceof DeliveryAgent) {
+                DeliveryAgent da = (DeliveryAgent) e;
                 Object[] row = new Object[1];
                 row[0] = da;
                 model.addRow(row);

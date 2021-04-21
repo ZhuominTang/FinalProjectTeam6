@@ -8,6 +8,7 @@ package Business.Customer;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.Item;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.ShippingOrder;
 
 import Business.WorkQueue.WorkRequest;
 import java.util.HashMap;
@@ -24,6 +25,16 @@ public class Order extends WorkRequest {
     private Enterprise enterprise;
     private String deliverymanName;
     private String DeliveryAgentName;
+    private ShippingOrder shippingOrder;
+
+    public ShippingOrder getShippingOrder() {
+        return shippingOrder;
+    }
+
+    public void setShippingOrder(ShippingOrder shippingOrder) {
+        this.shippingOrder = shippingOrder;
+    }
+    
 
     public String getDeliverymanName() {
         return deliverymanName;
