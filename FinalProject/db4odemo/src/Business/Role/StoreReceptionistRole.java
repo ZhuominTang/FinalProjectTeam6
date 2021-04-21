@@ -25,6 +25,6 @@ public class StoreReceptionistRole extends Role {
     }
         @Override
     public String toString() {
-        return "StoreReceptionistRole";
+        return "StoreReceptionist";
     }
 }

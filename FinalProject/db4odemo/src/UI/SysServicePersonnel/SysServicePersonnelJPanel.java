@@ -113,6 +113,10 @@ public class SysServicePersonnelJPanel extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
 
+        setPreferredSize(new java.awt.Dimension(900, 640));
+
+        jPanel3.setPreferredSize(new java.awt.Dimension(900, 640));
+
         deliveryAgentRegistrationJTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -195,6 +199,8 @@ public class SysServicePersonnelJPanel extends javax.swing.JPanel {
         );
 
         jTabbedPane1.addTab("DeliveryAgent Registration", jPanel3);
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(900, 640));
 
         storeRegistrationJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -280,6 +286,8 @@ public class SysServicePersonnelJPanel extends javax.swing.JPanel {
         );
 
         jTabbedPane1.addTab("Store Registration", jPanel1);
+
+        profilePanel.setPreferredSize(new java.awt.Dimension(900, 640));
 
         cancelButton2.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         cancelButton2.setText("Cancel");
@@ -380,6 +388,8 @@ public class SysServicePersonnelJPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("My Profile", profilePanel);
 
+        passwordPanel.setPreferredSize(new java.awt.Dimension(900, 640));
+
         cancelButton1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         cancelButton1.setText("Cancel");
         cancelButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -460,11 +470,11 @@ public class SysServicePersonnelJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
