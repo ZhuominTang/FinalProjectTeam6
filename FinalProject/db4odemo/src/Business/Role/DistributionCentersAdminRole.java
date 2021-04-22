@@ -17,11 +17,10 @@ import javax.swing.JPanel;
  *
  * @author tzm
  */
-public class DeliveryAgentAdminRoll extends Role {
-
-    @Override
+public class DistributionCentersAdminRole extends Role{
+   @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system, JFrame frame) {
-        return new DeliveryAgentJPanel(userProcessContainer, system,account,frame,organization, enterprise);
+        return  null;
 
-    }
+    } 
 }
