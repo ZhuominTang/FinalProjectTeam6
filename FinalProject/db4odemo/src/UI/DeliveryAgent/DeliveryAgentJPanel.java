@@ -7,11 +7,14 @@ package UI.DeliveryAgent;
 
 import Business.Business.EcoSystem;
 import Business.DB4OUtil.DB4OUtil;
+import Business.Employee.Employee;
 
 import Business.Enterprise.DeliveryAgent;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.Store;
+import Business.Organization.DeliveryManOrganization;
 import Business.Organization.DistributionCentersOrganization;
+import Business.Organization.DriverOrganization;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
@@ -57,8 +60,8 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
         this.setSize(900, 640);
 
         populateDeliveryCenterTable();
-        //  populateDeliveryMan();
-        // populateDriver();
+         populateDeliveryMan();
+         populateDriver();
         editButton.setEnabled(true);
         saveButton.setEnabled(false);
         cancelButton.setEnabled(false);
@@ -85,30 +88,46 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
 
     }
 
-    /* public void populateDeliveryMan() {
-      DefaultTableModel dtm = (DefaultTableModel) ManageDeliveryManTable1.getModel();
-       dtm.setRowCount(0);
-       for (DeliveryMan deliveryMan : deliveryManDirectory.getDeliveryManDirectory()) {
-           Object[] row = new Object[3];
-            row[0] = deliveryMan;
-            row[1] = deliveryMan.getAddress();
-            row[2] = deliveryMan.getPhoneNumber();
-            dtm.addRow(row);
+    public void populateDeliveryMan() {
+         DefaultTableModel dtm = (DefaultTableModel) ManageDeliveryManTable1.getModel();
+        dtm.setRowCount(0);
+        for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
+
+            if (org instanceof DeliveryManOrganization) {
+                for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
+                    Employee e = (Employee) ua.getPerson();
+                    Object[] row = new Object[3];
+                    row[0] = ua;
+                    row[1] = e;
+                    row[2] = e.getPhone();
+                    dtm.addRow(row);
+                }
+                break;
+            }
+
         }
     }
 
-    private void populateDriver() {
+    public void populateDriver() {
         DefaultTableModel dtm = (DefaultTableModel) ManageDriverTable.getModel();
         dtm.setRowCount(0);
-        for (Driver driver : system.getDriverDirectory().getDriverDirectory()) {
-            Object[] row = new Object[3];
-            row[0] = driver;
-            row[1] = driver.getAddress();
-            row[2] = driver.getPhoneNumber();
-            dtm.addRow(row);
+        for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
+
+            if (org instanceof DriverOrganization) {
+                for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
+                    Employee e = (Employee) ua.getPerson();
+                    Object[] row = new Object[3];
+                    row[0] = ua;
+                    row[1] = e;
+                    row[2] = e.getPhone();
+                    dtm.addRow(row);
+                }
+                 break;
+            }
+
         }
     }
-     */
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -203,7 +222,7 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
         ManageDeliveryCenterjPanelLayout.setHorizontalGroup(
             ManageDeliveryCenterjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ManageDeliveryCenterjPanelLayout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(ManageDeliveryCenterjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ManageDeliveryCenterjPanelLayout.createSequentialGroup()
@@ -212,18 +231,18 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
                             .addComponent(CreatejButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(RemovejButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(ManageDeliveryCenterjPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(createPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(34, 34, 34))
+                .addGap(46, 46, 46))
         );
         ManageDeliveryCenterjPanelLayout.setVerticalGroup(
             ManageDeliveryCenterjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ManageDeliveryCenterjPanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(ManageDeliveryCenterjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(ManageDeliveryCenterjPanelLayout.createSequentialGroup()
-                        .addComponent(createPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
+                .addGroup(ManageDeliveryCenterjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ManageDeliveryCenterjPanelLayout.createSequentialGroup()
+                        .addComponent(createPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(CreatejButton1)
                         .addGap(18, 18, 18)
                         .addComponent(RemovejButton2))
@@ -243,7 +262,7 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Username", "phone", "adress"
+                "Username", "Name", "Phone"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -284,7 +303,7 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
                 .addGroup(ManageDriverjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(createButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(workPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ManageDriverjPanelLayout.setVerticalGroup(
             ManageDriverjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,7 +330,7 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Username", "phone", "adress"
+                "Username", "Name", "Phone"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -352,7 +371,7 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
                 .addGroup(ManageDelivertManJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(createButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(workPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ManageDelivertManJPanelLayout.setVerticalGroup(
             ManageDelivertManJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -402,7 +421,7 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 788, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -464,7 +483,7 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
                         .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cancelButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addContainerGap(272, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -559,7 +578,7 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
                         .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -646,6 +665,7 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
 
         Organization org = (Organization) DeliveryCenterTable.getValueAt(selectedRow, 0);
         enterprise.getOrganizationDirectory().getOrganizationList().remove(org);
+        DB4OUtil.getInstance().storeSystem(system);
         populateDeliveryCenterTable();
     }//GEN-LAST:event_RemovejButton2ActionPerformed
 
@@ -745,11 +765,11 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
 
     private void createButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButton2ActionPerformed
         // TODO add your handling code here:
-        this.workPanel.removeAll();
-        CreateDeliveryManJPanel ep = new CreateDeliveryManJPanel(this.system, this, this.workPanel, this.enterprise);
-        this.workPanel.add(ep);
-        CardLayout layout = (CardLayout) this.workPanel.getLayout();
-        layout.next(this.workPanel);
+        this.workPanel1.removeAll();
+        CreateDeliveryManJPanel ep = new CreateDeliveryManJPanel(this.system, this, this.workPanel1, this.enterprise);
+        this.workPanel1.add(ep);
+        CardLayout layout = (CardLayout) this.workPanel1.getLayout();
+        layout.next(this.workPanel1);
     }//GEN-LAST:event_createButton2ActionPerformed
     private void setOverviewFieldsEditable(boolean b) {
         nameTextField.setEnabled(b);
