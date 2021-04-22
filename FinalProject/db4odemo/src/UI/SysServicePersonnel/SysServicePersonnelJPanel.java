@@ -522,7 +522,6 @@ public class SysServicePersonnelJPanel extends javax.swing.JPanel {
         DeliveryAgent da = (DeliveryAgent) system.getEnterpriseDirectory().createAndAddEnterprise(darr.getStoreName(), Enterprise.EnterpriseType.DeliveryAgent);
         Organization org = da.getOrganizationDirectory().createOrganization(Organization.Type.DeliveryAgentAdmin);
         da.getOrganizationDirectory().createOrganization(Organization.Type.DeliveryMan);
-        
         da.getOrganizationDirectory().createOrganization(Organization.Type.Driver);
         da.setAddress(darr.getAddress());
         da.setPhoneNumber(darr.getPhoneNumber());
