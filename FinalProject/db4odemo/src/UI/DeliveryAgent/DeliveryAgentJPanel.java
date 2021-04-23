@@ -280,7 +280,7 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
         jScrollPane5.setViewportView(CustomerDistributionjTable);
 
         jLabel8.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        jLabel8.setText("Shipping from DistributionCenter To Customer ");
+        jLabel8.setText("ShippingOrder from DistributionCenter To Customer ");
 
         jLabel3.setFont(new java.awt.Font("Lucida Bright", 0, 18)); // NOI18N
         jLabel3.setText("Distribution Review");
