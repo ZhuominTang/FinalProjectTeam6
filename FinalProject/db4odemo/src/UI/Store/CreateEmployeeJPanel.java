@@ -34,7 +34,7 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
     private JPanel panel;
     private JPanel workPanel;
     private Role role;
-    
+
     public CreateEmployeeJPanel(EcoSystem system, JPanel panel, JPanel workPanel, Enterprise en) {
         initComponents();
         this.system = system;
@@ -247,80 +247,88 @@ public class CreateEmployeeJPanel extends javax.swing.JPanel {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         if (roleComboBox.getSelectedItem() != null) {
-            
-                char[] passwordCharArray1 = passwordField1.getPassword();
-                String new1 = String.valueOf(passwordCharArray1);
-                char[] passwordCharArray2 = passwordField2.getPassword();
-                String new2 = String.valueOf(passwordCharArray2);
-                String userName = usernameTextField.getText();
-                
-                Boolean used = false;
 
-                if (!emailTextField.getText().equals("") && !firstNameTextField.getText().equals("") && !new1.equals("") && !new2.equals("")
+            char[] passwordCharArray1 = passwordField1.getPassword();
+            String new1 = String.valueOf(passwordCharArray1);
+            char[] passwordCharArray2 = passwordField2.getPassword();
+            String new2 = String.valueOf(passwordCharArray2);
+            String userName = usernameTextField.getText();
+            String phoneNumber = phoneTextField.getText();
+            try {
+                int i = Integer.parseInt(phoneNumber);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Incorrect phone number input format!");
+                return;
+            }
+            Boolean used = false;
+
+            if (!emailTextField.getText().equals("") && !firstNameTextField.getText().equals("") && !new1.equals("") && !new2.equals("")
                     && !lastNameTextField.getText().equals("") && !phoneTextField.getText().equals("")) {
-                    for (UserAccount ua : system.getUserAccountDirectory().getUserAccountList()) {
-                        if (userName.equals(ua.getUsername())) {
-                            used = true;
-                            break;
-                        }
+                for (UserAccount ua : system.getUserAccountDirectory().getUserAccountList()) {
+                    if (userName.equals(ua.getUsername())) {
+                        used = true;
+                        break;
                     }
-                    if (used == false) {
-                     Label1:
-                        for (Enterprise en : system.getEnterpriseDirectory().getEnterpriseList()) {
-                            for (Organization org : en.getOrganizationDirectory().getOrganizationList()) {
-                                for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
-                                    if (userName.equals(ua.getUsername())) {
-                                        used = true;
-                                        break Label1;
-                                    }
+                }
+                if (used == false) {
+                    Label1:
+                    for (Enterprise en : system.getEnterpriseDirectory().getEnterpriseList()) {
+                        for (Organization org : en.getOrganizationDirectory().getOrganizationList()) {
+                            for (UserAccount ua : org.getUserAccountDirectory().getUserAccountList()) {
+                                if (userName.equals(ua.getUsername())) {
+                                    used = true;
+                                    break Label1;
                                 }
                             }
                         }
                     }
-                    if (used == true) {
-                        JOptionPane.showMessageDialog(this, "UserName has been used", "Warning", JOptionPane.WARNING_MESSAGE);
-                        return;
-                    }
-                    if (new1.equals(new2)) {
-                        if (roleComboBox.getSelectedItem().equals(Role.RoleType.StoreReceptionist)) {
-                            Employee em = new Employee();
-                            em.setFirstName(firstNameTextField.getText());
-                            em.setLastName(lastNameTextField.getText());
-                            em.setAddress(phoneTextField.getText());
-                            em.setPhone(emailTextField.getText());
-                            for (Organization org : en.getOrganizationDirectory().getOrganizationList()){
-                                if(org instanceof StoreReceptionistOrganization)
+                }
+                if (used == true) {
+                    JOptionPane.showMessageDialog(this, "UserName has been used", "Warning", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                if (new1.equals(new2)) {
+                    if (roleComboBox.getSelectedItem().equals(Role.RoleType.StoreReceptionist)) {
+                        Employee em = new Employee();
+                        em.setFirstName(firstNameTextField.getText());
+                        em.setLastName(lastNameTextField.getText());
+                        em.setAddress(phoneTextField.getText());
+                        em.setPhone(emailTextField.getText());
+                        for (Organization org : en.getOrganizationDirectory().getOrganizationList()) {
+                            if (org instanceof StoreReceptionistOrganization) {
                                 org.getUserAccountDirectory().createUserAccount(this.usernameTextField.getText(), new2, em, new StoreReceptionistRole());
                             }
-                        } else if (roleComboBox.getSelectedItem().equals(Role.RoleType.StoreDistributionPersonnel)){
-                            Employee em = new Employee();
-                            em.setFirstName(firstNameTextField.getText());
-                            em.setLastName(lastNameTextField.getText());
-                            em.setAddress(phoneTextField.getText());
-                            em.setPhone(emailTextField.getText());
-                            for (Organization org : en.getOrganizationDirectory().getOrganizationList()){
-                                if(org instanceof StoreReceptionistOrganization)
+                        }
+                    } else if (roleComboBox.getSelectedItem().equals(Role.RoleType.StoreDistributionPersonnel)) {
+                        Employee em = new Employee();
+                        em.setFirstName(firstNameTextField.getText());
+                        em.setLastName(lastNameTextField.getText());
+                        em.setAddress(phoneTextField.getText());
+                        em.setPhone(emailTextField.getText());
+                        for (Organization org : en.getOrganizationDirectory().getOrganizationList()) {
+                            if (org instanceof StoreReceptionistOrganization) {
                                 org.getUserAccountDirectory().createUserAccount(this.usernameTextField.getText(), new2, em, new StoreDistributionPersonnelRole());
                             }
                         }
-                        // Save
-                        DB4OUtil.getInstance().storeSystem(system);
-                        StoreManagerMainJPanel p = (StoreManagerMainJPanel) panel;
-                        p.populateEmployeeTable();
-                        this.workPanel.remove(this);
-                        CardLayout layout = (CardLayout) this.workPanel.getLayout();
-                        layout.previous(this.workPanel);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Passwords don't match!");
                     }
+                    // Save
+                    DB4OUtil.getInstance().storeSystem(system);
+                    StoreManagerMainJPanel p = (StoreManagerMainJPanel) panel;
+                    p.populateEmployeeTable();
+                    this.workPanel.remove(this);
+                    CardLayout layout = (CardLayout) this.workPanel.getLayout();
+                    layout.previous(this.workPanel);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Information can't be empty!");
+                    JOptionPane.showMessageDialog(null, "Passwords don't match!");
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Information can't be empty!");
+            }
 
         } else {
             JOptionPane.showMessageDialog(null, "Please select a role!");
         }
-        
+
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void roleComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleComboBoxActionPerformed

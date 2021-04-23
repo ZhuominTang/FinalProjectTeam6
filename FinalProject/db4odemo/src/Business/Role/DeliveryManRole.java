@@ -9,6 +9,7 @@ import Business.Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import UI.DeliveryWork.DeliveryManJPanel1;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -20,7 +21,7 @@ public class DeliveryManRole  extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system, JFrame frame) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new DeliveryManJPanel1( userProcessContainer, organization,enterprise, account, system, frame);
     }
     
 }

@@ -45,6 +45,7 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
     private Role role;
     private Enterprise enterprise;
     private Employee employee;
+
     public StoreDistributionPersonnelJPanel(JPanel userProcessContainer, Organization organization, Enterprise enterprise, UserAccount account, EcoSystem system, JFrame frame) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
@@ -56,7 +57,7 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
         this.store = (Store) enterprise;
         employee = (Employee) account.getPerson();
         this.setSize(900, 640);
-        
+
         populateorderTable();
         setProfileFieldsEditable(false);
         setProfileInfo();
@@ -457,32 +458,33 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
 
     private void ConfirmOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmOrderButtonActionPerformed
         int index = orderTable.getSelectedRow();
-        
+
         if (orderTable.getSelectedRow() >= 0) {
             Order order = (Order) orderTable.getValueAt(index, 2);
-                if(order.getStatus()!= Status.Waiting){
+            if (order.getStatus() != Status.Waiting) {
                 JOptionPane.showMessageDialog(this, "This Order had been solved.");
                 return;
-                }
-                
-            order.setStatus(Status.Accepted);
+            }
+
+            order.setStatus(Status.Sending);
+            populateorderTable();
             DB4OUtil.getInstance().storeSystem(system);
 
             ChooseDeliveryJPanel cdp = new ChooseDeliveryJPanel(system, this, ChooseDeliveryCompanyPanel, this.store, order);
             this.ChooseDeliveryCompanyPanel.add(cdp);
             CardLayout layout = (CardLayout) ChooseDeliveryCompanyPanel.getLayout();
             layout.next(ChooseDeliveryCompanyPanel);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Please select an order");
         }
-        
+
     }//GEN-LAST:event_ConfirmOrderButtonActionPerformed
 
     private void cancelOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelOrderButtonActionPerformed
         int index = orderTable.getSelectedRow();
         if (orderTable.getSelectedRow() >= 0) {
             Order order = (Order) orderTable.getValueAt(index, 2);
-            if(order.getStatus()!= Status.Waiting){
+            if (order.getStatus() != Status.Waiting) {
                 JOptionPane.showMessageDialog(this, "This Order had been solved.");
                 return;
             }
@@ -490,7 +492,7 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
             DB4OUtil.getInstance().storeSystem(system);
             populateorderTable();
             populateDetailTable(order);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Please select an order");
         }
     }//GEN-LAST:event_cancelOrderButtonActionPerformed
@@ -499,11 +501,11 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
         int index = orderTable.getSelectedRow();
 
         if (index >= 0) {
-            Order order = (Order)orderTable.getValueAt(index, 2);
+            Order order = (Order) orderTable.getValueAt(index, 2);
             populateDetailTable(order);
             TotalPriceTextField.setText(String.valueOf(order.calculatePrice()));
         }
-        
+
     }//GEN-LAST:event_orderTableMouseClicked
 
     private void cancelButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButton2ActionPerformed
@@ -517,11 +519,16 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
 
     private void saveButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButton1ActionPerformed
         if (firstNameTextField.getText().trim().equals("") || lastNameTextField.getText().trim().equals("") || addressTextField.getText().trim().equals("")
-            || phoneTextField.getText().trim().equals("")) {
+                || phoneTextField.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Input cannot be empty", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         } else {
-
+  try {
+                int i = Integer.parseInt(phoneTextField.getText());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Incorrect phone number input format!");
+                return;
+            }
             account.getPerson().setFirstName(firstNameTextField.getText());
             account.getPerson().setLastName(lastNameTextField.getText());
             employee.setAddress(addressTextField.getText());
@@ -618,11 +625,11 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField usernameTextField;
     // End of variables declaration//GEN-END:variables
 
-    private void populateorderTable() {
+    public void populateorderTable() {
         DefaultTableModel dtm = (DefaultTableModel) orderTable.getModel();
         dtm.setRowCount(0);
         for (WorkRequest wr : store.getWorkQueue().getWorkRequestList()) {
-            if(wr instanceof Order){
+            if (wr instanceof Order) {
                 Order order = (Order) wr;
                 Object row[] = new Object[3];
                 row[0] = order.getRequestDate();
@@ -643,8 +650,9 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
             row[2] = o.getKey().getUnitPrice() * o.getValue();
             model.addRow(row);
         }
-        
+
     }
+
     private void setProfileFieldsEditable(boolean b) {
 
         firstNameTextField.setEnabled(b);
@@ -653,6 +661,7 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
         phoneTextField.setEnabled(b);
 
     }
+
     private void setProfileInfo() {
         firstNameTextField.setText(account.getPerson().getFirstName());
         lastNameTextField.setText(account.getPerson().getLastName());
@@ -661,6 +670,7 @@ public class StoreDistributionPersonnelJPanel extends javax.swing.JPanel {
         addressTextField.setText(employee.getAddress());
         phoneTextField.setText(employee.getPhone());
     }
+
     private void resetPasswordField() {
         passwordField.setText("");
         passwordField1.setText("");

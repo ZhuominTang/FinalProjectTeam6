@@ -268,7 +268,7 @@ public class StoreManagerMainJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "RequestDate", "ResolveDate", "Customer", "Deliveryman", "Status", "CustomerMessage", "DeliverymanMessage"
+                "RequestDate", "ResolveDate", "Customer", "Status", "CustomerComment", "DeliverymanAgent", "Deliveryman"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -303,7 +303,7 @@ public class StoreManagerMainJPanel extends javax.swing.JPanel {
                 .addContainerGap(168, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Review", jPanel4);
+        jTabbedPane1.addTab("Overview", jPanel4);
 
         jLabel13.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel13.setText("Old Password:");
@@ -697,13 +697,13 @@ public class StoreManagerMainJPanel extends javax.swing.JPanel {
             if(wr instanceof Order){
                 Order order = (Order) wr;
                 Object row[] = new Object[7];
-                row[0] = order.getRequestDate();
-                row[1] = order.getResolveDate();
+                row[0] =order.dataFormat(order.getRequestDate());
+                row[1] = (wr.getResolveDate() == null) ? null : wr.dataFormat(wr.getResolveDate());
                 row[2] = order.getSender();
-                row[3] = order.getReceiver();
-                row[4] = order.getStatus();
-                row[5] = order.getSenderMessage();
-                row[6] = order.getReceiverMessage();
+                row[3] = order;
+                row[4] = order.getSenderMessage();
+                row[5] = order.getDeliveryAgentName();
+                row[6] = order.getDeliverymanName();
                 dtm.addRow(row);
             }
         }

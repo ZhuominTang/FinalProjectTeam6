@@ -254,8 +254,8 @@
         <Container class="javax.swing.JPanel" name="jPanel4">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Review">
-                <Property name="tabTitle" type="java.lang.String" value="Review"/>
+              <JTabbedPaneConstraints tabName="Overview">
+                <Property name="tabTitle" type="java.lang.String" value="Overview"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -295,10 +295,10 @@
                         <Column editable="false" title="RequestDate" type="java.lang.Object"/>
                         <Column editable="false" title="ResolveDate" type="java.lang.Object"/>
                         <Column editable="false" title="Customer" type="java.lang.Object"/>
-                        <Column editable="false" title="Deliveryman" type="java.lang.Object"/>
                         <Column editable="false" title="Status" type="java.lang.Object"/>
-                        <Column editable="false" title="CustomerMessage" type="java.lang.Object"/>
-                        <Column editable="true" title="DeliverymanMessage" type="java.lang.Object"/>
+                        <Column editable="false" title="CustomerComment" type="java.lang.Object"/>
+                        <Column editable="false" title="DeliverymanAgent" type="java.lang.Object"/>
+                        <Column editable="true" title="Deliveryman" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

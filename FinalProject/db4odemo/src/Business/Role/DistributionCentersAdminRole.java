@@ -10,6 +10,7 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import UI.DeliveryAgent.DeliveryAgentJPanel;
+import UI.DeliveryWork.DeliveryCenterMainJPanel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -20,7 +21,7 @@ import javax.swing.JPanel;
 public class DistributionCentersAdminRole extends Role{
    @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system, JFrame frame) {
-        return  null;
+        return  new DeliveryCenterMainJPanel(userProcessContainer,  organization, enterprise,  account,  system,  frame);
 
     } 
 }

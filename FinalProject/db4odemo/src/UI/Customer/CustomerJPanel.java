@@ -789,7 +789,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
             return;
         }
         WorkRequest wr = (WorkRequest) orderJTable1.getValueAt(selectedRowIndex, 1);
-        if (wr.getStatus() != Status.Accepted) {
+        if (wr.getStatus() != Status.Received) {
             JOptionPane.showMessageDialog(this, "You can only comment on completed orders!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -808,7 +808,7 @@ public class CustomerJPanel extends javax.swing.JPanel {
             return;
         }
         WorkRequest wr = (WorkRequest) orderJTable1.getValueAt(selectedRowIndex, 1);
-        if (wr.getStatus() != Status.Sending) {
+        if (wr.getStatus() != Status.Delivery) {
             JOptionPane.showMessageDialog(this, "Only orders that are being sent can be confirmed!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         } else {
@@ -869,6 +869,12 @@ public class CustomerJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Input cannot be empty", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         } else {
+              try {
+                long l= Long.parseLong(phoneTextField.getText());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Incorrect phone number input format!");
+                return;
+            }
 
             account.getPerson().setFirstName(firstNameTextField.getText());
             account.getPerson().setLastName(lastNameTextField.getText());

@@ -9,6 +9,8 @@ import Business.Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import UI.DeliveryWork.DriverJPanel;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -20,7 +22,9 @@ public class Driver extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system, JFrame frame) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new DriverJPanel(userProcessContainer,organization,  enterprise,account,  system, frame); 
     }
+
+
     
 }

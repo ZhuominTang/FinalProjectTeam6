@@ -8,6 +8,7 @@ package Business.Customer;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.Item;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.Commodity;
 import Business.WorkQueue.ShippingOrder;
 
 import Business.WorkQueue.WorkRequest;
@@ -21,10 +22,11 @@ import java.util.Map;
 public class Order extends WorkRequest {
 
     private HashMap<Item, Integer> orderItem;
-    
+
     private Enterprise enterprise;
     private String deliverymanName;
     private String DeliveryAgentName;
+    private Commodity commodity;
     private ShippingOrder shippingOrder;
 
     public ShippingOrder getShippingOrder() {
@@ -34,7 +36,14 @@ public class Order extends WorkRequest {
     public void setShippingOrder(ShippingOrder shippingOrder) {
         this.shippingOrder = shippingOrder;
     }
-    
+
+    public Commodity getCommodity() {
+        return commodity;
+    }
+
+    public void setCommodity(Commodity commodity) {
+        this.commodity = commodity;
+    }
 
     public String getDeliverymanName() {
         return deliverymanName;
@@ -51,7 +60,6 @@ public class Order extends WorkRequest {
     public void setDeliveryAgentName(String DeliveryAgentName) {
         this.DeliveryAgentName = DeliveryAgentName;
     }
-   
 
     public Order() {
         super();

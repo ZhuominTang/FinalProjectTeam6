@@ -153,11 +153,17 @@ public class ChooseDeliveryJPanel extends javax.swing.JPanel {
             so.setCustomerPhone(((Customer) order.getSender().getPerson()).getPhone());
             so.setStoreAddress(store.getAddress());
             so.setStorePhone(store.getPhoneNumber());
+            
             order.setShippingOrder(so);
             da.getWorkQueue().getWorkRequestList().add(so);
-            DB4OUtil.getInstance().storeSystem(system);
+            order.setDeliveryAgentName(da.getName());
+            StoreDistributionPersonnelJPanel p = (StoreDistributionPersonnelJPanel) panel;
             
+                p.populateorderTable();
+            DB4OUtil.getInstance().storeSystem(system);
+            JOptionPane.showMessageDialog(this, "The shippingorder has been sent, please wait for the delivery agent's response!", "Information", JOptionPane.DEFAULT_OPTION);
             ChooseDeliveryCompanyPanel.remove(this);
+            
         } else {
             JOptionPane.showMessageDialog(null, "Please select a delivery company");
         }

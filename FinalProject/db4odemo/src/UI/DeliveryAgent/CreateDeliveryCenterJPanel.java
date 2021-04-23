@@ -208,6 +208,12 @@ public class CreateDeliveryCenterJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Fields cannot be left empty");
             return;
         }
+         try{
+          long l= Long.parseLong(phoneNumber);
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Incorrect phone number input format!");
+            return;
+        }
         Boolean used = false;
         for (UserAccount ua : system.getUserAccountDirectory().getUserAccountList()) {
             if (userName.equals(ua.getUsername())) {
@@ -246,6 +252,7 @@ public class CreateDeliveryCenterJPanel extends javax.swing.JPanel {
         dc.setAddress(address);
         dc.setPhoneNumber(phoneNumber);
         dc.getUserAccountDirectory().createUserAccount(userName, password, new Employee(), new DistributionCentersAdminRole());
+         DB4OUtil.getInstance().storeSystem(system);
 
         JOptionPane.showMessageDialog(null, "DistributionCenter Created");
           DB4OUtil.getInstance().storeSystem(system);

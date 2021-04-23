@@ -6,24 +6,29 @@
 package UI.DeliveryAgent;
 
 import Business.Business.EcoSystem;
+
 import Business.DB4OUtil.DB4OUtil;
 import Business.Employee.Employee;
 
 import Business.Enterprise.DeliveryAgent;
 import Business.Enterprise.Enterprise;
-import Business.Enterprise.Store;
+
 import Business.Organization.DeliveryManOrganization;
 import Business.Organization.DistributionCentersOrganization;
 import Business.Organization.DriverOrganization;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
-import UI.Store.CreateEmployeeJPanel;
+import Business.WorkQueue.WorkRequest;
+
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import Business.Enterprise.Store;
+import Business.WorkQueue.Commodity;
+import Business.WorkQueue.ShippingOrder;
 
 /**
  *
@@ -36,10 +41,11 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
     private UserAccount account;
     private JFrame frame;
     private Organization organization;
-
+    private Store store;
     private Role role;
     private Enterprise enterprise;
     private DeliveryAgent deliveryAgent;
+    
 
     /**
      * Creates new form DeliveryAgentJPanel
@@ -62,11 +68,12 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
         populateDeliveryCenterTable();
          populateDeliveryMan();
          populateDriver();
+         populateReviewTable();
         editButton.setEnabled(true);
         saveButton.setEnabled(false);
         cancelButton.setEnabled(false);
-        // setOverviewFieldsEditable(false);
-        //  setOverviewInfo();
+         setOverviewFieldsEditable(false);
+          setOverviewInfo();
     }
 
     public void populateDeliveryCenterTable() {
@@ -127,6 +134,57 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
 
         }
     }
+    
+    
+    
+    
+    private void populateReviewTable() {
+       populateDeliveryCenter();
+       populateCustomerDistributionjTable();
+        }
+    
+    public void populateDeliveryCenter(){
+         DefaultTableModel dtm = (DefaultTableModel) DistributionCenterjTable.getModel();
+        dtm.setRowCount(0);
+       
+            for(WorkRequest wr : enterprise.getWorkQueue().getWorkRequestList()){
+                 if(wr instanceof ShippingOrder){
+                   Object[] row = new Object[5];
+                    row[0] = ((ShippingOrder) wr).getStoreAddress();
+                    row[1] = ((ShippingOrder) wr).getStorePhone();
+                    row[2] = wr;
+                    row[3] = wr.dataFormat(wr.getRequestDate());
+                    if(wr.getResolveDate()!=null){
+                    row[4] = wr.dataFormat(wr.getResolveDate());
+                    }
+                    dtm.addRow(row);    
+            }
+        }
+            
+    }
+    
+    
+    
+    public void populateCustomerDistributionjTable(){
+         DefaultTableModel dtm = (DefaultTableModel) CustomerDistributionjTable.getModel();       
+        dtm.setRowCount(0);
+        
+        for(WorkRequest wr2 : enterprise.getWorkQueue().getWorkRequestList()){
+            if(wr2 instanceof  Commodity){
+                 Object[] row = new Object[5];
+                    row[0] = ((Commodity) wr2).getCustomerAddress();
+                    row[1] = ((Commodity) wr2).getCustomerPhone();
+                    row[2] = wr2;
+                    if(wr2.getRequestDate()!=null){
+                    row[3] = wr2.dataFormat(wr2.getRequestDate());
+                     }
+                   if(wr2.getResolveDate()!=null){
+                    row[4] = wr2.dataFormat(wr2.getResolveDate());
+                    }
+                    dtm.addRow(row); 
+            }
+        }
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -150,14 +208,21 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
         ManageDriverTable = new javax.swing.JTable();
         workPanel = new javax.swing.JPanel();
         createButton1 = new javax.swing.JButton();
+        RemoveDriverjButton3 = new javax.swing.JButton();
         ManageDelivertManJPanel = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         ManageDeliveryManTable1 = new javax.swing.JTable();
         workPanel1 = new javax.swing.JPanel();
         createButton2 = new javax.swing.JButton();
+        RemoveDeliverymanjButton4 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        reviewTable = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        DistributionCenterjTable = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        CustomerDistributionjTable = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         passwordField1 = new javax.swing.JPasswordField();
@@ -292,6 +357,14 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
             }
         });
 
+        RemoveDriverjButton3.setFont(new java.awt.Font("Lucida Bright", 0, 14)); // NOI18N
+        RemoveDriverjButton3.setText("Remove Driver");
+        RemoveDriverjButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveDriverjButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ManageDriverjPanelLayout = new javax.swing.GroupLayout(ManageDriverjPanel);
         ManageDriverjPanel.setLayout(ManageDriverjPanelLayout);
         ManageDriverjPanelLayout.setHorizontalGroup(
@@ -300,10 +373,13 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(ManageDriverjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(createButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(ManageDriverjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(ManageDriverjPanelLayout.createSequentialGroup()
+                        .addComponent(createButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(RemoveDriverjButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(workPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         ManageDriverjPanelLayout.setVerticalGroup(
             ManageDriverjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,10 +388,12 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
                 .addGroup(ManageDriverjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(ManageDriverjPanelLayout.createSequentialGroup()
-                        .addComponent(createButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(ManageDriverjPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(createButton1)
+                            .addComponent(RemoveDriverjButton3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(workPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("ManageDriver", ManageDriverjPanel);
@@ -360,6 +438,14 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
             }
         });
 
+        RemoveDeliverymanjButton4.setFont(new java.awt.Font("Lucida Bright", 0, 14)); // NOI18N
+        RemoveDeliverymanjButton4.setText("Remove DeliveryMan");
+        RemoveDeliverymanjButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveDeliverymanjButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ManageDelivertManJPanelLayout = new javax.swing.GroupLayout(ManageDelivertManJPanel);
         ManageDelivertManJPanel.setLayout(ManageDelivertManJPanelLayout);
         ManageDelivertManJPanelLayout.setHorizontalGroup(
@@ -369,69 +455,111 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ManageDelivertManJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(createButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(ManageDelivertManJPanelLayout.createSequentialGroup()
+                        .addComponent(createButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(RemoveDeliverymanjButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(workPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
         ManageDelivertManJPanelLayout.setVerticalGroup(
             ManageDelivertManJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ManageDelivertManJPanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(ManageDelivertManJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(ManageDelivertManJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(ManageDelivertManJPanelLayout.createSequentialGroup()
-                        .addComponent(createButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(ManageDelivertManJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(createButton2)
+                            .addComponent(RemoveDeliverymanjButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(workPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("ManageDeliveryMan", ManageDelivertManJPanel);
 
-        reviewTable.setModel(new javax.swing.table.DefaultTableModel(
+        DistributionCenterjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "RequestDate", "ResolveDate", "Customer", "Deliveryman", "Status", "CustomerMessage", "DeliverymanMessage"
+                "StoreAddress", "StorePhoneNumber", "Status", "RequestDate", "ReceivedDate"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
-            };
+        ));
+        jScrollPane2.setViewportView(DistributionCenterjTable);
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        jLabel6.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
+        jLabel6.setText("Shipping From Store To DistributionCenter");
+
+        CustomerDistributionjTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "CustomerAddress", "CustomerPhoneNumer", "Status", "RequestDate", "DeliveryDate"
             }
-        });
-        reviewTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                reviewTableMouseClicked(evt);
-            }
-        });
-        jScrollPane8.setViewportView(reviewTable);
+        ));
+        jScrollPane5.setViewportView(CustomerDistributionjTable);
+
+        jLabel8.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
+        jLabel8.setText("Shipping from DistributionCenter To Customer ");
+
+        jLabel3.setFont(new java.awt.Font("Lucida Bright", 0, 18)); // NOI18N
+        jLabel3.setText("Distribution Review");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 788, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 904, Short.MAX_VALUE)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(342, 342, 342)
+                                .addComponent(jLabel3))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel6)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addComponent(jLabel3)
+                .addGap(29, 29, 29)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(85, 85, 85))
         );
 
-        jTabbedPane1.addTab("Review", jPanel5);
+        jTabbedPane1.addTab("Overview", jPanel5);
 
         jLabel13.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel13.setText("Old Password:");
@@ -483,7 +611,7 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
                         .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cancelButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addContainerGap(301, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -578,7 +706,7 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
                         .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -609,7 +737,7 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -681,10 +809,6 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
         layout.next(this.workPanel);
     }//GEN-LAST:event_createButton1ActionPerformed
 
-    private void reviewTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reviewTableMouseClicked
-
-    }//GEN-LAST:event_reviewTableMouseClicked
-
     private void cancelButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButton1ActionPerformed
         passwordField.setText("");
         passwordField1.setText("");
@@ -734,6 +858,12 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         if (!phoneTextField.getText().equals("") && !addressTextArea.getText().equals("")
                 && !nameTextField.getText().equals("")) {
+              try {
+                 long l= Long.parseLong(phoneTextField.getText());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Incorrect phone number input format!");
+                return;
+            }
             deliveryAgent.setName(nameTextField.getText());
             deliveryAgent.setAddress(addressTextArea.getText());
             deliveryAgent.setPhoneNumber(phoneTextField.getText());
@@ -771,6 +901,60 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) this.workPanel1.getLayout();
         layout.next(this.workPanel1);
     }//GEN-LAST:event_createButton2ActionPerformed
+
+    private void RemoveDriverjButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveDriverjButton3ActionPerformed
+       int selectedRow = ManageDriverTable.getSelectedRow();
+            
+     
+        UserAccount ua= (UserAccount)ManageDriverTable.getValueAt(selectedRow,0);
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+      
+      DriverOrganization drorg = null;
+       for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
+
+            if (org instanceof DriverOrganization) {
+                drorg = (DriverOrganization) org;
+                break;
+            }
+
+        }
+      drorg.getUserAccountDirectory().removeUserAccount(ua);
+      
+        DB4OUtil.getInstance().storeSystem(system);
+        populateDriver();
+      
+    }//GEN-LAST:event_RemoveDriverjButton3ActionPerformed
+
+    private void RemoveDeliverymanjButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveDeliverymanjButton4ActionPerformed
+        int selectedRow = ManageDeliveryManTable1.getSelectedRow();
+            
+     
+        UserAccount ua= (UserAccount)ManageDeliveryManTable1.getValueAt(selectedRow,0);
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+      
+      DeliveryManOrganization drorg = null;
+       for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
+
+            if (org instanceof DeliveryManOrganization) {
+                drorg = (DeliveryManOrganization) org;
+                break;
+            }
+
+        }
+      drorg.getUserAccountDirectory().removeUserAccount(ua);
+      
+        DB4OUtil.getInstance().storeSystem(system);
+       populateDeliveryMan();
+      
+    }//GEN-LAST:event_RemoveDeliverymanjButton4ActionPerformed
     private void setOverviewFieldsEditable(boolean b) {
         nameTextField.setEnabled(b);
         phoneTextField.setEnabled(b);
@@ -786,12 +970,16 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CreatejButton1;
+    private javax.swing.JTable CustomerDistributionjTable;
     private javax.swing.JTable DeliveryCenterTable;
+    private javax.swing.JTable DistributionCenterjTable;
     private javax.swing.JPanel ManageDelivertManJPanel;
     private javax.swing.JPanel ManageDeliveryCenterjPanel;
     private javax.swing.JTable ManageDeliveryManTable1;
     private javax.swing.JTable ManageDriverTable;
     private javax.swing.JPanel ManageDriverjPanel;
+    private javax.swing.JButton RemoveDeliverymanjButton4;
+    private javax.swing.JButton RemoveDriverjButton3;
     private javax.swing.JButton RemovejButton2;
     private javax.swing.JTextArea addressTextArea;
     private javax.swing.JButton cancelButton;
@@ -805,15 +993,19 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField nameTextField;
@@ -821,7 +1013,6 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
     private javax.swing.JPasswordField passwordField1;
     private javax.swing.JPasswordField passwordField2;
     private javax.swing.JTextField phoneTextField;
-    private javax.swing.JTable reviewTable;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton submitButton;
     private javax.swing.JPanel workPanel;

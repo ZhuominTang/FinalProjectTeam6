@@ -35,6 +35,30 @@ public class WorkQueue {
         return count;
 
     }
+    public int countOrder() {
+        int count = 0;
+        for (int i = 0; i < workRequestList.size(); i++) {
+            if (workRequestList.get(i) instanceof Order) {
+                count++;
+
+            }
+
+        }
+        return count;
+
+    }
+     public int countCommodity() {
+        int count = 0;
+        for (int i = 0; i < workRequestList.size(); i++) {
+            if (workRequestList.get(i) instanceof Commodity) {
+                count++;
+
+            }
+
+        }
+        return count;
+
+    }
 
     public double calculateTotalPurchased() {
         double money = 0;

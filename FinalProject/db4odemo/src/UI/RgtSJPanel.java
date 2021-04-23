@@ -177,6 +177,12 @@ public class RgtSJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Input cannot be empty!");
             return;
         }
+         try{
+          long l= Long.parseLong(phone);
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Incorrect phone number input format!");
+            return;
+        }
         Boolean used = false;
 
         for (UserAccount ua : system.getUserAccountDirectory().getUserAccountList()) {

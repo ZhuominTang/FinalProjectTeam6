@@ -40,6 +40,7 @@ public class StoreReceptionistJPanel extends javax.swing.JPanel {
     private Role role;
     private Enterprise enterprise;
     private Employee employee;
+
     public StoreReceptionistJPanel(JPanel userProcessContainer, Organization organization, Enterprise enterprise, UserAccount account, EcoSystem system, JFrame frame) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
@@ -51,11 +52,11 @@ public class StoreReceptionistJPanel extends javax.swing.JPanel {
         this.store = (Store) enterprise;
         employee = (Employee) account.getPerson();
         this.setSize(900, 640);
-        
+
         populateMessageTable();
         setProfileFieldsEditable(false);
         setProfileInfo();
-        
+
         saveButton1.setEnabled(false);
         cancelButton2.setEnabled(false);
         editButton1.setEnabled(true);
@@ -403,16 +404,22 @@ public class StoreReceptionistJPanel extends javax.swing.JPanel {
         ccr.setReceiverMessage(messageTextArea.getText());
         ccr.setResolveDate(new Date());
         ccr.setStatus(Status.Accepted);
+         DB4OUtil.getInstance().storeSystem(system);
         populateMessageTable();
     }//GEN-LAST:event_ReplyjButtonActionPerformed
 
     private void saveButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButton1ActionPerformed
         if (firstNameTextField.getText().trim().equals("") || lastNameTextField.getText().trim().equals("") || addressTextField.getText().trim().equals("")
-            || phoneTextField.getText().trim().equals("")) {
+                || phoneTextField.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Input cannot be empty", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         } else {
-
+            try {
+                int i = Integer.parseInt(phoneTextField.getText());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Incorrect phone number input format!");
+                return;
+            }
             account.getPerson().setFirstName(firstNameTextField.getText());
             account.getPerson().setLastName(lastNameTextField.getText());
             employee.setAddress(addressTextField.getText());
@@ -485,6 +492,7 @@ public class StoreReceptionistJPanel extends javax.swing.JPanel {
         phoneTextField.setEnabled(b);
 
     }
+
     private void setProfileInfo() {
         firstNameTextField.setText(account.getPerson().getFirstName());
         lastNameTextField.setText(account.getPerson().getLastName());
@@ -493,11 +501,12 @@ public class StoreReceptionistJPanel extends javax.swing.JPanel {
         addressTextField.setText(employee.getAddress());
         phoneTextField.setText(employee.getPhone());
     }
+
     private void resetPasswordField() {
         passwordField.setText("");
         passwordField1.setText("");
         passwordField2.setText("");
-    }   
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable MessagejTable;
@@ -538,7 +547,7 @@ public class StoreReceptionistJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) MessagejTable.getModel();
         model.setRowCount(0);
         for (WorkRequest wr : store.getWorkQueue().getWorkRequestList()) {
-            if(wr instanceof CustomerContactRequest){
+            if (wr instanceof CustomerContactRequest) {
                 CustomerContactRequest ccr = (CustomerContactRequest) wr;
                 Object[] row = new Object[5];
                 row[0] = ccr.dataFormat(ccr.getRequestDate());
@@ -546,10 +555,9 @@ public class StoreReceptionistJPanel extends javax.swing.JPanel {
                 row[2] = ccr;
                 row[3] = ccr.getSenderMessage();
                 row[4] = ccr.getReceiverMessage();
-                model.addRow(row);               
+                model.addRow(row);
             }
         }
     }
-
 
 }
