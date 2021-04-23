@@ -61,7 +61,7 @@ public class ChooseDeliveryJPanel extends javax.swing.JPanel {
         CanceljButton = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("宋体", 1, 18)); // NOI18N
-        jLabel1.setText("Choose Delivery Company:");
+        jLabel1.setText("Choose Delivery Agent:");
 
         DeliveryCompanyjTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -159,7 +159,7 @@ public class ChooseDeliveryJPanel extends javax.swing.JPanel {
             order.setDeliveryAgentName(da.getName());
             StoreDistributionPersonnelJPanel p = (StoreDistributionPersonnelJPanel) panel;
             
-                p.populateorderTable();
+             p.populateorderTable();
             DB4OUtil.getInstance().storeSystem(system);
             JOptionPane.showMessageDialog(this, "The shippingorder has been sent, please wait for the delivery agent's response!", "Information", JOptionPane.DEFAULT_OPTION);
             ChooseDeliveryCompanyPanel.remove(this);

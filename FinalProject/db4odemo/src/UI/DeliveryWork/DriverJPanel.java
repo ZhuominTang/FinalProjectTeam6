@@ -135,9 +135,9 @@ public class DriverJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(AllocatedOrderjTable);
 
-        jLabel2.setText("Unallocated Shipping");
+        jLabel2.setText("All ShippingOrders");
 
-        jLabel3.setText("Allocated Shipping");
+        jLabel3.setText("Allocated  ShippingOrders");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

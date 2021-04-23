@@ -223,12 +223,12 @@
             </Container>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Unallocated Shipping"/>
+                <Property name="text" type="java.lang.String" value="All ShippingOrders"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Allocated Shipping"/>
+                <Property name="text" type="java.lang.String" value="Allocated  ShippingOrders"/>
               </Properties>
             </Component>
           </SubComponents>

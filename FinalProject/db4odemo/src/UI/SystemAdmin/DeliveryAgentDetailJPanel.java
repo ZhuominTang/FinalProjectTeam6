@@ -96,17 +96,25 @@ public class DeliveryAgentDetailJPanel extends javax.swing.JPanel {
 
         DistributionCenterjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "StoreAddress", "StorePhoneNumber", "Status", "RequestDate", "ReceivedDate"
+                "StoreName", "StoreAddress", "StorePhoneNumber", "Status", "RequestDate", "ReceivedDate"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(DistributionCenterjTable);
 
         jLabel8.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
@@ -114,17 +122,25 @@ public class DeliveryAgentDetailJPanel extends javax.swing.JPanel {
 
         CustomerDistributionjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "CustomerAddress", "CustomerPhoneNumer", "Status", "DeliveredDate", "CompletedDate"
+                "CustomerName", "CustomerAddress", "CustomerPhoneNumer", "Status", "DeliveredDate", "CompletedDate"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane5.setViewportView(CustomerDistributionjTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -213,48 +229,48 @@ public class DeliveryAgentDetailJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButton1ActionPerformed
-public void populateDeliveryCenter(){
-         DefaultTableModel dtm = (DefaultTableModel) DistributionCenterjTable.getModel();
+public void populateDeliveryCenter() {
+        DefaultTableModel dtm = (DefaultTableModel) DistributionCenterjTable.getModel();
         dtm.setRowCount(0);
-       
-            for(WorkRequest wr : enterprise.getWorkQueue().getWorkRequestList()){
-                 if(wr instanceof ShippingOrder){
-                   Object[] row = new Object[5];
-                    row[0] = ((ShippingOrder) wr).getStoreAddress();
-                    row[1] = ((ShippingOrder) wr).getStorePhone();
-                    row[2] = wr;
-                    row[3] = wr.dataFormat(wr.getRequestDate());
-                    if(wr.getResolveDate()!=null){
-                    row[4] = wr.dataFormat(wr.getResolveDate());
-                    }
-                    dtm.addRow(row);    
+
+        for (WorkRequest wr : enterprise.getWorkQueue().getWorkRequestList()) {
+            if (wr instanceof ShippingOrder) {
+                Object[] row = new Object[6];
+                row[0] = ((ShippingOrder) wr).getStoreEnterprise().getName();
+                row[1] = ((ShippingOrder) wr).getStoreAddress();
+                row[2] = ((ShippingOrder) wr).getStorePhone();
+                row[3] = wr;
+                row[4] = wr.dataFormat(wr.getRequestDate());
+                if (wr.getResolveDate() != null) {
+                    row[5] = wr.dataFormat(wr.getResolveDate());
+                }
+                dtm.addRow(row);
             }
         }
-            
+
     }
-    
-    
-    
-    public void populateCustomerDistributionjTable(){
-         DefaultTableModel dtm = (DefaultTableModel) CustomerDistributionjTable.getModel();       
+
+    public void populateCustomerDistributionjTable() {
+        DefaultTableModel dtm = (DefaultTableModel) CustomerDistributionjTable.getModel();
         dtm.setRowCount(0);
-        
-        for(WorkRequest wr2 : enterprise.getWorkQueue().getWorkRequestList()){
-            if(wr2 instanceof  Commodity){
-                 Object[] row = new Object[5];
-                    row[0] = ((Commodity) wr2).getCustomerAddress();
-                    row[1] = ((Commodity) wr2).getCustomerPhone();
-                    row[2] = wr2;
-                    if(wr2.getRequestDate()!=null){
-                    row[3] = wr2.dataFormat(wr2.getRequestDate());
-                     }
-                   if(wr2.getResolveDate()!=null){
-                    row[4] = wr2.dataFormat(wr2.getResolveDate());
-                    }
-                    dtm.addRow(row); 
+
+        for (WorkRequest wr2 : enterprise.getWorkQueue().getWorkRequestList()) {
+            if (wr2 instanceof Commodity) {
+                Object[] row = new Object[6];
+                row[0] = ((Commodity) wr2).getOrder().getSender().getUsername();
+                row[1] = ((Commodity) wr2).getCustomerAddress();
+                row[2] = ((Commodity) wr2).getCustomerPhone();
+                row[3] = wr2;
+                if (wr2.getRequestDate() != null) {
+                    row[4] = wr2.dataFormat(wr2.getRequestDate());
+                }
+                if (wr2.getResolveDate() != null) {
+                    row[5] = wr2.dataFormat(wr2.getResolveDate());
+                }
+                dtm.addRow(row);
             }
         }
-        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable CustomerDistributionjTable;

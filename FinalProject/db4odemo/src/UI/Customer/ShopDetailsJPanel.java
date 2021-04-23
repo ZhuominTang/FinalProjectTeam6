@@ -53,7 +53,7 @@ public class ShopDetailsJPanel extends javax.swing.JPanel {
         populateReviewTable();
         populatecustomerContactJTable();
         populateDetail();
-        
+
     }
 
     public void populateReviewTable() {
@@ -87,17 +87,19 @@ public class ShopDetailsJPanel extends javax.swing.JPanel {
 
     }
 
-     private void populatecustomerContactJTable() {
+    private void populatecustomerContactJTable() {
         DefaultTableModel model = (DefaultTableModel) customerContactJTable.getModel();
         model.setRowCount(0);
         for (WorkRequest wr : account.getWorkQueue().getWorkRequestList()) {
             if (wr instanceof CustomerContactRequest) {
-                Object[] row = new Object[4];
-                row[0] = wr.getSenderMessage();
-                row[1] = wr.dataFormat(wr.getRequestDate());
-                row[2] = wr.getReceiverMessage();
-                row[3] = (wr.getResolveDate() == null) ? null : wr.dataFormat(wr.getResolveDate());
-                model.addRow(row);
+                if (((CustomerContactRequest) wr).getEnterprise() == enterprise) {
+                    Object[] row = new Object[4];
+                    row[0] = wr.getSenderMessage();
+                    row[1] = wr.dataFormat(wr.getRequestDate());
+                    row[2] = wr.getReceiverMessage();
+                    row[3] = (wr.getResolveDate() == null) ? null : wr.dataFormat(wr.getResolveDate());
+                    model.addRow(row);
+                }
             }
         }
     }
@@ -385,7 +387,7 @@ public class ShopDetailsJPanel extends javax.swing.JPanel {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add(new OrderJPanel(userProcessContainer,system,account,enterprise));
+        userProcessContainer.add(new OrderJPanel(userProcessContainer, system, account, enterprise));
         layout.next(userProcessContainer);
     }//GEN-LAST:event_addButtonActionPerformed
 
@@ -402,12 +404,13 @@ public class ShopDetailsJPanel extends javax.swing.JPanel {
         ccr.setSender(account);
         ccr.setRequestDate(new Date());
         ccr.setSenderMessage(messageJTextField.getText());
+        ccr.setEnterprise(enterprise);
         enterprise.getWorkQueue().getWorkRequestList().add(ccr);
         account.getWorkQueue().getWorkRequestList().add(ccr);
         ccr.setStatus(Status.Waiting);
         JOptionPane.showMessageDialog(this, "The message has been sent!", "Information", JOptionPane.DEFAULT_OPTION);
         populatecustomerContactJTable();
-         DB4OUtil.getInstance().storeSystem(system);
+        DB4OUtil.getInstance().storeSystem(system);
     }//GEN-LAST:event_submitJButtonActionPerformed
 
 

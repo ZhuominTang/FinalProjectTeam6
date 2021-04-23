@@ -202,7 +202,7 @@ public class StoreManagerMainJPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Username", "Role", "phone", "adress"
+                "Username", "Role", "Email", "Phone"
             }
         ) {
             boolean[] canEdit = new boolean [] {

@@ -188,8 +188,8 @@
                       <Table columnCount="4" rowCount="4">
                         <Column editable="false" title="Username" type="java.lang.Object"/>
                         <Column editable="false" title="Role" type="java.lang.Object"/>
-                        <Column editable="false" title="phone" type="java.lang.Object"/>
-                        <Column editable="false" title="adress" type="java.lang.Object"/>
+                        <Column editable="false" title="Email" type="java.lang.Object"/>
+                        <Column editable="false" title="Phone" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="autoResizeMode" type="int" value="3"/>

@@ -45,7 +45,6 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
     private Role role;
     private Enterprise enterprise;
     private DeliveryAgent deliveryAgent;
-    
 
     /**
      * Creates new form DeliveryAgentJPanel
@@ -66,14 +65,14 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
         this.setSize(900, 640);
 
         populateDeliveryCenterTable();
-         populateDeliveryMan();
-         populateDriver();
-         populateReviewTable();
+        populateDeliveryMan();
+        populateDriver();
+        populateReviewTable();
         editButton.setEnabled(true);
         saveButton.setEnabled(false);
         cancelButton.setEnabled(false);
-         setOverviewFieldsEditable(false);
-          setOverviewInfo();
+        setOverviewFieldsEditable(false);
+        setOverviewInfo();
     }
 
     public void populateDeliveryCenterTable() {
@@ -96,7 +95,7 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
     }
 
     public void populateDeliveryMan() {
-         DefaultTableModel dtm = (DefaultTableModel) ManageDeliveryManTable1.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) ManageDeliveryManTable1.getModel();
         dtm.setRowCount(0);
         for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
 
@@ -129,62 +128,59 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
                     row[2] = e.getPhone();
                     dtm.addRow(row);
                 }
-                 break;
+                break;
             }
 
         }
     }
-    
-    
-    
-    
+
     private void populateReviewTable() {
-       populateDeliveryCenter();
-       populateCustomerDistributionjTable();
-        }
-    
-    public void populateDeliveryCenter(){
-         DefaultTableModel dtm = (DefaultTableModel) DistributionCenterjTable.getModel();
-        dtm.setRowCount(0);
-       
-            for(WorkRequest wr : enterprise.getWorkQueue().getWorkRequestList()){
-                 if(wr instanceof ShippingOrder){
-                   Object[] row = new Object[5];
-                    row[0] = ((ShippingOrder) wr).getStoreAddress();
-                    row[1] = ((ShippingOrder) wr).getStorePhone();
-                    row[2] = wr;
-                    row[3] = wr.dataFormat(wr.getRequestDate());
-                    if(wr.getResolveDate()!=null){
-                    row[4] = wr.dataFormat(wr.getResolveDate());
-                    }
-                    dtm.addRow(row);    
-            }
-        }
-            
+        populateDeliveryCenter();
+        populateCustomerDistributionjTable();
     }
-    
-    
-    
-    public void populateCustomerDistributionjTable(){
-         DefaultTableModel dtm = (DefaultTableModel) CustomerDistributionjTable.getModel();       
+
+    public void populateDeliveryCenter() {
+        DefaultTableModel dtm = (DefaultTableModel) DistributionCenterjTable.getModel();
         dtm.setRowCount(0);
-        
-        for(WorkRequest wr2 : enterprise.getWorkQueue().getWorkRequestList()){
-            if(wr2 instanceof  Commodity){
-                 Object[] row = new Object[5];
-                    row[0] = ((Commodity) wr2).getCustomerAddress();
-                    row[1] = ((Commodity) wr2).getCustomerPhone();
-                    row[2] = wr2;
-                    if(wr2.getRequestDate()!=null){
-                    row[3] = wr2.dataFormat(wr2.getRequestDate());
-                     }
-                   if(wr2.getResolveDate()!=null){
-                    row[4] = wr2.dataFormat(wr2.getResolveDate());
-                    }
-                    dtm.addRow(row); 
+
+        for (WorkRequest wr : enterprise.getWorkQueue().getWorkRequestList()) {
+            if (wr instanceof ShippingOrder) {
+                Object[] row = new Object[6];
+                row[0] = ((ShippingOrder) wr).getStoreEnterprise().getName();
+                row[1] = ((ShippingOrder) wr).getStoreAddress();
+                row[2] = ((ShippingOrder) wr).getStorePhone();
+                row[3] = wr;
+                row[4] = wr.dataFormat(wr.getRequestDate());
+                if (wr.getResolveDate() != null) {
+                    row[5] = wr.dataFormat(wr.getResolveDate());
+                }
+                dtm.addRow(row);
             }
         }
+
+    }
+
+    public void populateCustomerDistributionjTable() {
+        DefaultTableModel dtm = (DefaultTableModel) CustomerDistributionjTable.getModel();
+        dtm.setRowCount(0);
+
+        for (WorkRequest wr2 : enterprise.getWorkQueue().getWorkRequestList()) {
+            if (wr2 instanceof Commodity) {
+                Object[] row = new Object[6];
+                row[0] = ((Commodity) wr2).getOrder().getSender().getUsername();
+                row[1] = ((Commodity) wr2).getCustomerAddress();
+                row[2] = ((Commodity) wr2).getCustomerPhone();
+                row[3] = wr2;
+                if (wr2.getRequestDate() != null) {
+                    row[4] = wr2.dataFormat(wr2.getRequestDate());
+                }
+                if (wr2.getResolveDate() != null) {
+                    row[5] = wr2.dataFormat(wr2.getResolveDate());
+                }
+                dtm.addRow(row);
+            }
         }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -248,17 +244,25 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
 
         DistributionCenterjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "StoreAddress", "StorePhoneNumber", "Status", "RequestDate", "ReceivedDate"
+                "StoreName", "StoreAddress", "StorePhoneNumber", "Status", "RequestDate", "ReceivedDate"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(DistributionCenterjTable);
 
         jLabel6.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
@@ -266,24 +270,32 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
 
         CustomerDistributionjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "CustomerAddress", "CustomerPhoneNumer", "Status", "RequestDate", "DeliveryDate"
+                "CustomerName", "CustomerAddress", "CustomerPhoneNumer", "Status", "RequestDate", "DeliveryDate"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane5.setViewportView(CustomerDistributionjTable);
 
         jLabel8.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
         jLabel8.setText("ShippingOrder from DistributionCenter To Customer ");
 
         jLabel3.setFont(new java.awt.Font("Lucida Bright", 0, 18)); // NOI18N
-        jLabel3.setText("Distribution Review");
+        jLabel3.setText("Distribution Overview");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -292,23 +304,18 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 904, Short.MAX_VALUE)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(342, 342, 342)
+                        .addComponent(jLabel3))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(342, 342, 342)
-                                .addComponent(jLabel3))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel6)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap()
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING))))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,7 +326,7 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -858,8 +865,8 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         if (!phoneTextField.getText().equals("") && !addressTextArea.getText().equals("")
                 && !nameTextField.getText().equals("")) {
-              try {
-                 long l= Long.parseLong(phoneTextField.getText());
+            try {
+                long l = Long.parseLong(phoneTextField.getText());
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Incorrect phone number input format!");
                 return;
@@ -903,18 +910,16 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_createButton2ActionPerformed
 
     private void RemoveDriverjButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveDriverjButton3ActionPerformed
-       int selectedRow = ManageDriverTable.getSelectedRow();
-            
-     
-        UserAccount ua= (UserAccount)ManageDriverTable.getValueAt(selectedRow,0);
+        int selectedRow = ManageDriverTable.getSelectedRow();
+
+        UserAccount ua = (UserAccount) ManageDriverTable.getValueAt(selectedRow, 0);
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-      
-      DriverOrganization drorg = null;
-       for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
+        DriverOrganization drorg = null;
+        for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
 
             if (org instanceof DriverOrganization) {
                 drorg = (DriverOrganization) org;
@@ -922,26 +927,24 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
             }
 
         }
-      drorg.getUserAccountDirectory().removeUserAccount(ua);
-      
+        drorg.getUserAccountDirectory().removeUserAccount(ua);
+
         DB4OUtil.getInstance().storeSystem(system);
         populateDriver();
-      
+
     }//GEN-LAST:event_RemoveDriverjButton3ActionPerformed
 
     private void RemoveDeliverymanjButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveDeliverymanjButton4ActionPerformed
         int selectedRow = ManageDeliveryManTable1.getSelectedRow();
-            
-     
-        UserAccount ua= (UserAccount)ManageDeliveryManTable1.getValueAt(selectedRow,0);
+
+        UserAccount ua = (UserAccount) ManageDeliveryManTable1.getValueAt(selectedRow, 0);
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-      
-      DeliveryManOrganization drorg = null;
-       for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
+        DeliveryManOrganization drorg = null;
+        for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
 
             if (org instanceof DeliveryManOrganization) {
                 drorg = (DeliveryManOrganization) org;
@@ -949,11 +952,11 @@ public class DeliveryAgentJPanel extends javax.swing.JPanel {
             }
 
         }
-      drorg.getUserAccountDirectory().removeUserAccount(ua);
-      
+        drorg.getUserAccountDirectory().removeUserAccount(ua);
+
         DB4OUtil.getInstance().storeSystem(system);
-       populateDeliveryMan();
-      
+        populateDeliveryMan();
+
     }//GEN-LAST:event_RemoveDeliverymanjButton4ActionPerformed
     private void setOverviewFieldsEditable(boolean b) {
         nameTextField.setEnabled(b);
