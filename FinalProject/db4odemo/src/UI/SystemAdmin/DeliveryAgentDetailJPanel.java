@@ -76,10 +76,10 @@ public class DeliveryAgentDetailJPanel extends javax.swing.JPanel {
         phoneTextField.setEditable(false);
 
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jLabel4.setText("Quantity Of Order:");
+        jLabel4.setText("Quantity Of Orders:");
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        jLabel1.setText("DeliveyAgentName:");
+        jLabel1.setText("DeliveryAgentName:");
 
         quantityTextField.setEditable(false);
 
@@ -92,7 +92,7 @@ public class DeliveryAgentDetailJPanel extends javax.swing.JPanel {
         jLabel5.setText("Phone:");
 
         jLabel6.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        jLabel6.setText("Shipping From Store To DistributionCenter");
+        jLabel6.setText("ShippingOrder From Store To DistributionCenter");
 
         DistributionCenterjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -110,7 +110,7 @@ public class DeliveryAgentDetailJPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(DistributionCenterjTable);
 
         jLabel8.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        jLabel8.setText("Shipping from DistributionCenter To Customer ");
+        jLabel8.setText("ShippingOrder from DistributionCenter To Customer ");
 
         CustomerDistributionjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

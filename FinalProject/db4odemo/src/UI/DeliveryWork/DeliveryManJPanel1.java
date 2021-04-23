@@ -185,7 +185,7 @@ public class DeliveryManJPanel1 extends javax.swing.JPanel {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("DeliveryMan", jPanel1);
+        jTabbedPane1.addTab("WorkArea", jPanel1);
 
         cancelButton2.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         cancelButton2.setText("Cancel");

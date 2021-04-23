@@ -180,7 +180,7 @@ public class DriverJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Driver", jPanel1);
+        jTabbedPane1.addTab("WorkArea", jPanel1);
 
         cancelButton2.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         cancelButton2.setText("Cancel");
@@ -274,7 +274,7 @@ public class DriverJPanel extends javax.swing.JPanel {
                     .addComponent(editButton1)
                     .addComponent(saveButton1)
                     .addComponent(cancelButton2))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("My Profile", profilePanel1);
@@ -350,7 +350,7 @@ public class DriverJPanel extends javax.swing.JPanel {
                 .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(submitButton)
                     .addComponent(cancelButton1))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Change Password", passwordPanel);
